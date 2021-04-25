@@ -5,7 +5,7 @@ module.exports = {
         if (d.value.fields.length) {
             const text = await d.resolveAll()
             
-            if (!text) return undefined
+            if (typeof text === undefined) return undefined
             
             d.container.embed.setTitle(text)
         } else {

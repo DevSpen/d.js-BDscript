@@ -5,7 +5,7 @@ module.exports = {
         if (d.value.fields.length) {
             const text = await d.resolveAll()
             
-            if (!text) return undefined
+            if (typeof text === undefined) return undefined
             
             d.container.embed.setDescription(text)
         } else {
@@ -14,4 +14,4 @@ module.exports = {
         
         return d.deflate(d.value.id, "")
     }
-}
+} 
