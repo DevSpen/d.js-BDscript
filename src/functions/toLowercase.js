@@ -12,3 +12,4 @@ module.exports = {
             return d.deflate(d.value.id, d.value.inside.toLowerCase())
         }
     } 
+}
