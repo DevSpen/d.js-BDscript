@@ -7,6 +7,19 @@ Object.prototype.deflate = function (id, data, stop = false, code) {
     }
 }
 
+Object.prototype.resolveArray = async function() {
+    const array = []
+    
+    for (const code of this.value.inside.split(";")) {
+        const data = await this.resolveCode(code)
+        
+        if (typeof code === "undefined") return undefined 
+        else array.push(data) 
+    }
+    
+    return array 
+}
+
 Object.prototype.fieldsIn = function (code) {
     return this.value.fields.filter(f => code.includes(this.client.bot.snowflake(f.id)))
 }
@@ -17,6 +30,7 @@ Object.prototype.resolveField = async function(index) {
     const field = this.value.fields[index]
     
     let data = Object.assign(Object.create(this), this)
+    const val = this.value.fields[index]
     data.value = val 
     const replacer = await val.func.execute(data, true)
     if (!replacer) return undefined
