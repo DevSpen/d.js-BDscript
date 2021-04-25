@@ -5,6 +5,7 @@ const Parser = require("../main/parser")
 const Compile = require("../main/compiler")
 
 require("../prototypes/Objects")
+require("../prototypes/Arrays")
 
 module.exports = class Bot {
     constructor(options = {}) {
