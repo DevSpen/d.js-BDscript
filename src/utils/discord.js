@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 
-module.exports.permissions = (bits) => {
+module.exports.Permissions = (bits) => {
     const perms = new Discord.Permissions(bits)
     
     const flags = Object.keys(Discord.Permissions.FLAGS) 

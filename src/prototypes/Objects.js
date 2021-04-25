@@ -53,9 +53,10 @@ Object.prototype.resolveAll = async function() {
     return text
 }
 
-Object.prototype.sendError = function (error) {
+Object.prototype.sendError = function (...error) {
     try {
-        this.mainChannel.send(error) 
+        if (error.length === 1) this.mainChannel.send(error[0])
+        else this.mainChannel.send(`:x: Invalid ${error[0]} '${error[1]}' in \`${this.value.func.name}\``)
     } catch (e) {
         console.log(error)
     }
