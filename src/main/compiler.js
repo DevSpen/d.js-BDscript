@@ -28,7 +28,7 @@ module.exports = (client, code) => {
         
         if (fn.brackets && !fn.optional && !afterFunc.includes("]")) throw new Error(`${afterFunc.slice(0,15)}...\n^^^^ Missing ] after argument list`)
         
-        if (fn.brackets) {
+        if (fn.brackets && afterFunc[0] === "[") {
             const inside = afterFunc.slice(1).split("]")[0]
             
             collection.set(snowflake, {
