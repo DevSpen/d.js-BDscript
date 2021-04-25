@@ -1,5 +1,5 @@
 module.exports = {
-    name: "$sum",
+    name: "$multi",
     brackets: true, 
     execute: async d => {
         const { value } = d 
@@ -9,9 +9,9 @@ module.exports = {
             
             if (!value.inside) return undefined 
             
-            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) + Number(y))) 
+            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) * Number(y))) 
         } else {
-            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) + Number(y))) 
+            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) * Number(y))) 
         }
     }
 }
