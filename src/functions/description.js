@@ -9,7 +9,7 @@ module.exports = {
             
             d.container.embed.setDescription(text)
         } else {
-            d.containter.embed.setDescription(d.value.inside) 
+            d.container.embed.setDescription(d.value.inside) 
         }
         
         return d.deflate(d.value.id, "")
