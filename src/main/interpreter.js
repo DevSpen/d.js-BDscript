@@ -7,6 +7,8 @@ module.exports = async (client, data = {}, returnCode = false) => {
     
     data.client = client 
     
+    data.startedAt = Date.now() 
+    
     data.channel = data.channel || data.message.channel
     
     data.mainChannel = data.message.channel 
