@@ -22,6 +22,9 @@ module.exports = async (client, data = {}, returnCode = false) => {
     data.mainChannel = data.message.channel 
     
     data.container = {
+        randoms: {},
+        randomTexts: {}, 
+        randomStrings: {}, 
         array: data.command.compiled.data,
         code: data.command.compiled.code, 
         embed: new Discord.MessageEmbed() 
