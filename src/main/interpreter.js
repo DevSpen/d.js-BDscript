@@ -35,9 +35,9 @@ module.exports = async (client, data = {}, returnCode = false) => {
         
     if (data.container.embed.length) options.embed = data.container.embed 
         
-    if (returnCode) return { content: code, options } 
+    if (returnCode) return { content: data.container.code, options } 
     
     if (data.channel && (data.container.code.length || data.container.embed.length)) {
-        const m = await data.channel.send(data.container.code, options).catch(err => null)
+        const m = await data.channel.send(data.container.code, options).catch(err => null) 
     }
 }

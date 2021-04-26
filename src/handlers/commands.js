@@ -9,7 +9,7 @@ module.exports = (client, message) => {
     
     const cmd = args.shift().toLowerCase() 
     
-    const commands = client.bot.commands.command.filter(c => c.name === cmd || (c.aliases && c.aliases.includes(cmd)))
+    const commands = client.bot.commands.get("command").filter(c => c.name === cmd || (c.aliases && c.aliases.includes(cmd)))
     
     if (!commands.size) return 
     

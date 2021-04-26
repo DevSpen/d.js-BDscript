@@ -10,7 +10,7 @@ Object.prototype.deflate = function (id, data, stop = false, code) {
 Object.prototype.resolveArray = async function() {
     const array = []
     
-    for (const code of this.value.inside.split(";")) {
+    for (const code of this.value.splits) {
         const data = await this.resolveCode(code)
         
         if (typeof code === "undefined") return undefined 
@@ -23,6 +23,18 @@ Object.prototype.resolveArray = async function() {
 Object.prototype.fieldsIn = function (code) {
     return this.value.fields.filter(f => code.includes(this.client.bot.snowflake(f.id)))
 }
+
+Object.prototype.clone = function(name, obj) {
+    const object = {}
+    
+    for (const [key, val] of Object.entries(this)) {
+        if (name === key) object[key] = obj 
+        else object[key] = val 
+    }
+    
+    return object 
+}
+
 
 Object.prototype.resolveField = async function(index) {
     let text = this.value.inside 

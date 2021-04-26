@@ -7,7 +7,7 @@ module.exports = (client, code) => {
     
     let deniedIds = []
     
-    let compiled = code 
+    let compiled = code.escape() 
     
     for (const after of code.split("$").slice(1).reverse()) {
         const regex = new RegExp(`(${functions.map(a => `\\${a}`).join("|")})`, "g")
@@ -34,8 +34,9 @@ module.exports = (client, code) => {
             collection.set(snowflake, {
                 id: snowflake,
                 func: fn,
-                inside,
-                total: `${fn.name}[${inside}]`,
+                splits: inside.split(";").map(a => a.unescape()),
+                inside: inside.unescape(),
+                total: `${fn.name}[${inside.unescape()}]`,
                 fields: []
             })
             
@@ -44,6 +45,7 @@ module.exports = (client, code) => {
             collection.set(snowflake, {
                 id: snowflake,
                 func: fn,
+                splits: [],
                 total: fn.name, 
                 fields: []
             })

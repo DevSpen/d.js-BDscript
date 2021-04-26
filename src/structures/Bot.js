@@ -4,6 +4,7 @@ const interpreter = require("../main/interpreter")
 const Parser = require("../main/parser")
 const Compile = require("../main/compiler")
 
+require("../prototypes/Strings")
 require("../prototypes/Objects")
 require("../prototypes/Arrays")
 
@@ -20,9 +21,14 @@ module.exports = class Bot {
             value: this 
         })
         
+        Object.defineProperty(this, "compile", {
+            writable: false,
+            value: Compile
+        })
+        
         Object.defineProperty(this, "interpreter", {
             writable: false,
-            value: (data) => interpreter(this.client, data)
+            value: (data, rCode) => interpreter(this.client, data, rCode)
         })
         
         Object.defineProperty(this, "parser", {
@@ -52,13 +58,13 @@ module.exports = class Bot {
             if (!opts[property] && required) throw new Error(`command.${property} is required for '${opts.type}' command!`)
         }
         
-        if (!this.commands.has(opts.type)) this.commands[opts.type] = new Discord.Collection() 
+        if (!this.commands.has(opts.type)) this.commands.set(opts.type, new Discord.Collection()) 
         
-        opts.id = this.commands[opts.type].size
+        opts.id = this.commands.get(opts.type).size
         
         opts.compiled = Compile(this.client, opts.code)
         
-        this.commands[opts.type].set(opts.id, opts)
+        this.commands.get(opts.type).set(opts.id, opts)
     }
     
     login(token) {

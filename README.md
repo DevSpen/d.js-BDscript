@@ -1,11 +1,12 @@
-# Uses my newly top down parser #
+# d.js-BDscript #
+## REQUIRES NODEJS VERSION 14 OR EARLIER ##
 ---------------------------------
 Install using `npm i https://github.com/Rubenennj/d.js-BDscript`
 
 Inspired in [Bot Designer For Discord](https://discord.gg/bot)
 
 ```js
-const bdjs = require("soon")
+const bdjs = require("d.js-bdscript")
 
 const bot = new bdjs({
     token: "token here", //bot token
