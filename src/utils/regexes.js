@@ -1,0 +1,1 @@
+module.exports.USER = /<@!?(\d{17,19})>/
