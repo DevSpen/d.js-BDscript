@@ -21,7 +21,7 @@ bot.command({
 
 bot.readyEvent() //this will just notify us when the client is ready
 
-bot.onMessage() //message callback
+bot.addEvent("onMessage") //add message callback
 
 bot.login() //logs the bot on discord
 ```

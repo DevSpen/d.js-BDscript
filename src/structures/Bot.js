@@ -1,5 +1,7 @@
 const Discord = require("discord.js")
 const Commands = require("../utils/commands")
+const Listeners = require("../utils/events")
+
 const interpreter = require("../main/interpreter")
 const Parser = require("../main/parser")
 const Compile = require("../main/compiler")
@@ -71,8 +73,21 @@ module.exports = class Bot {
         this.client.login(token || this.options.token)
     }
     
-    //callbacks 
-    onMessage() {
-        this.client.on("message", (m) => require(`../events/message`)(this.client, m))
+    addEvent(eventOrEvents = []) {
+        if (typeof eventOrEvents === "string") {
+            const event = Listeners[eventOrEvents]
+                
+            if (!event) throw new Error(`Event ${eventOrEvents} does not exist!`)
+                
+            event[1](this.client) 
+        } else {
+            for (const name of eventOrEvents) {
+                const event = Listeners[name]
+                
+                if (!event) throw new Error(`Event ${name} does not exist!`)
+                
+                event[1](this.client) 
+            }
+        }
     }
 }
