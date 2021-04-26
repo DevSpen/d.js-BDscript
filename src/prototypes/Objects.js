@@ -1,4 +1,11 @@
 Object.prototype.deflate = function (id, data, stop = false, code) {
+    if (data === undefined) {
+        return {
+            id: this.client.bot.snowflake(this.value.id),
+            with: id || ""
+        }
+    }
+    
     return {
         id: this.client.bot.snowflake(id),
         with: data,

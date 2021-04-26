@@ -5,6 +5,14 @@ module.exports = async (client, data = {}, returnCode = false) => {
     
     if (!command) return undefined 
     
+    if (client.bot.options.respondToBots === false && data.message?.author?.bot === true) {
+        return undefined
+    }
+    
+    if (client.bot.options.guildOnly === true && data.message?.channel?.type === "dm") {
+        return undefined
+    }
+    
     data.client = client 
     
     data.startedAt = Date.now() 
@@ -32,13 +40,9 @@ module.exports = async (client, data = {}, returnCode = false) => {
         }
     }
     
-    const options = {} 
-        
-    if (data.container.embed.length) options.embed = data.container.embed 
-        
-    if (returnCode) return { content: data.container.code, options } 
+    if (returnCode) return data.container
     
-    if (data.channel && (data.container.code.length || data.container.embed.length)) {
-        const m = await data.channel.send(data.container.code, options).catch(err => null) 
+    if (data.channel) {
+        const m = await client.bot.resolveAPIMessage(data.channel, data.container) 
     }
 }

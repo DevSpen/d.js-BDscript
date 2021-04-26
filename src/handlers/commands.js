@@ -1,7 +1,7 @@
 module.exports = (client, message) => {
-    const prefixes = Array.isArray(client.bot.options.prefix) ? client.bot.options.prefix : [client.bot.options.prefix]
+    const prefixes = client.bot.options.prefix 
     
-    const prefix = prefixes.find(p => message.content.startsWith(p))
+    const prefix = (client.bot.options.mentionAsPrefix && client.bot.MentionRegExp.test(message.content) ? message.content.match(client.bot.MentionRegExp)[0] : undefined) || prefixes.find(p => message.content.startsWith(p))
     
     if (!prefix) return 
     

@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
 const Commands = require("../utils/commands")
 const Listeners = require("../utils/events")
-
+const DiscordUtil = require("../utils/discord")
+const ResolveAPIMessage = require("../main/resolveAPIMessage")
 const interpreter = require("../main/interpreter")
 const Parser = require("../main/parser")
 const Compile = require("../main/compiler")
@@ -12,6 +13,8 @@ require("../prototypes/Arrays")
 
 module.exports = class Bot {
     constructor(options = {}) {
+        options = this._resolve(options) 
+        
         this.client = new Discord.Client(options.client)
         
         this.options = options 
@@ -28,6 +31,11 @@ module.exports = class Bot {
             value: Compile
         })
         
+        Object.defineProperty(this, "resolveAPIMessage", {
+            writable: false,
+            value: ResolveAPIMessage
+        })
+        
         Object.defineProperty(this, "interpreter", {
             writable: false,
             value: (data, rCode) => interpreter(this.client, data, rCode)
@@ -39,10 +47,19 @@ module.exports = class Bot {
         })
     }
     
-    readyEvent() {
-        this.client.on("ready", () => {
-            console.log(`Ready on client ${client.user.tag}`)
-        })
+    get MentionRegExp() {
+        return new RegExp(`<@!?${this.client.user?.id}>`)
+    }
+    
+    _resolve(options) {
+        if (!options.prefix) throw new Error("Prefix was not given.")
+        
+        options.prefix = Array.isArray(options.prefix) ? options.prefix : [options.prefix]
+        
+        if (options.intents) options.intents = DiscordUtil.Intents(options.intents).bits 
+        else options.intents = Discord.Intents.ALL 
+        
+        return options 
     }
     
     snowflake(id) {
