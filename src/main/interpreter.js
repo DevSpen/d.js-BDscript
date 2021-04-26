@@ -24,7 +24,6 @@ module.exports = async (client, data = {}, returnCode = false) => {
         else {
             data.container.code = data.container.code.replace(res.id, res.with)
             if (res.stop) {
-                console.log(res) 
                 data.container.code = await data.resolveFields(res.stop, res.code)
                 break
             }

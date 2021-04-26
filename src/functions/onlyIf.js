@@ -4,9 +4,7 @@ module.exports = {
     name: "$onlyIf",
     brackets: true,
     execute: async d => {
-        const fields = d.value.inside.split(";")
-        
-        const [condition, ...code] = fields 
+        const [condition, ...code] = d.value.splits 
         
         const flds = d.fieldsIn(code.join(";"))
         
