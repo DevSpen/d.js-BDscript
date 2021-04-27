@@ -14,24 +14,13 @@ require("../prototypes/Arrays")
 
 module.exports = class Bot {
     constructor(options = {}) {
-        options = this._resolve(options) 
-        
         this.client = new Discord.Client(options.client)
-        
-        this.options = options 
         
         this.commands = new Discord.Collection() 
         
         Object.defineProperty(this.client, "bot", {
             writable: false,
             value: this 
-        })
-        
-        Object.defineProperty(this, "db", {
-            writable: true,
-            value: new SQL.Database({
-                path: this.options.databasePath || "./db.sqlite"
-            })
         })
         
         Object.defineProperty(this, "compile", {
@@ -56,6 +45,17 @@ module.exports = class Bot {
         
         Object.defineProperty(this, "variables", {
             value: [] 
+        })
+        
+        options = this._resolve(options) 
+        
+        this.options = options 
+        
+        Object.defineProperty(this, "db", {
+            writable: true,
+            value: new SQL.Database({
+                path: this.options.databasePath || "./db.sqlite"
+            })
         })
     }
     
@@ -84,6 +84,13 @@ module.exports = class Bot {
         
         options.prefix = Array.isArray(options.prefix) ? options.prefix : [options.prefix]
         
+        for (let i = 0;i < options.prefix.length;i++) {
+            const p = options.prefix[i]
+            if (p.includes("$")) {
+                options.prefix[i] = Compile(this.client, p)
+            } else options.prefix[i] = p 
+        }
+        
         if (options.intents) options.intents = DiscordUtil.Intents(options.intents).bits 
         else options.intents = Discord.Intents.ALL 
         
@@ -108,6 +115,8 @@ module.exports = class Bot {
         if (!this.commands.has(opts.type)) this.commands.set(opts.type, new Discord.Collection()) 
         
         opts.id = this.commands.get(opts.type).size
+        
+        opts.compiledName = Compile(this.client, opts.name ?? opts.channel ?? "") 
         
         opts.compiled = Compile(this.client, opts.code)
         

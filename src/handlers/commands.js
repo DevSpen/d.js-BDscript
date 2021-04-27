@@ -1,9 +1,35 @@
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
     const prefixes = client.bot.options.prefix 
     
-    const prefix = (client.bot.options.mentionAsPrefix && client.bot.MentionRegExp.test(message.content) ? message.content.match(client.bot.MentionRegExp)[0] : undefined) || prefixes.find(p => message.content.startsWith(p))
+    let prefix = client.bot.options.mentionAsPrefix && client.bot.MentionRegExp.test(message.content) ? message.content.match(client.bot.MentionRegExp)[0] : undefined
     
-    if (!prefix) return 
+    if (prefix === undefined) {
+        for (const prf of client.bot.options.prefix) {
+            if (typeof prf === "string") {
+                if (message.content.startsWith(prf)) {
+                    prefix = prf 
+                    break
+                }
+                continue
+            }
+            
+            const p = await client.bot.interpreter({
+                message,
+                command: {
+                    compiled: prf 
+                }
+            }, true)
+            
+            if (p === undefined) return undefined
+            
+            if (message.content.startsWith(p.code)) {
+                prefix = p.code 
+                break
+            }
+        }
+    }
+    
+    if (prefix === undefined) return 
     
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
     

@@ -18,6 +18,10 @@ module.exports = {
         limit = await d.resolveCode(limit)
       
         if (variable === undefined) return 
+        if (sort === undefined) return 
+        if (separator === undefined) return 
+        if (limit === undefined) return 
+        if (page === undefined) return 
         
         if (!custom) return d.sendError(":x: no leaderboard info specified!")
         

@@ -13,6 +13,6 @@
     "fs": "0.0.1-security",
     "ms": "^2.1.3",
     "parse-ms": "^3.0.0",
-    "sqlite_master.db": "^3.5.3"
+    "sqlite_master.db": "^3.6.0"
   }
 }
