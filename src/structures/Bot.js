@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const Commands = require("../utils/commands")
 const Listeners = require("../utils/events")
+const SQL = require("sqlite_master.db")
 const DiscordUtil = require("../utils/discord")
 const ResolveAPIMessage = require("../main/resolveAPIMessage")
 const interpreter = require("../main/interpreter")
@@ -26,6 +27,13 @@ module.exports = class Bot {
             value: this 
         })
         
+        Object.defineProperty(this, "db", {
+            writable: true,
+            value: new SQL.Database({
+                path: this.options.databasePath || "./db.sqlite"
+            })
+        })
+        
         Object.defineProperty(this, "compile", {
             writable: false,
             value: Compile
@@ -45,6 +53,26 @@ module.exports = class Bot {
             writable: false,
             value: Parser() 
         })
+        
+        Object.defineProperty(this, "variables", {
+            value: [] 
+        })
+    }
+    
+    variable(varOrVars) {
+        if (Array.isArray(varOrVars)) {
+            return varOrVars.map(v => this.variables.push(v))
+        } else {
+            if (varOrVars.name) {
+                return this.variables.push(varOrVars)
+            } else for (const [name, { type, value }] of Object.entries(varOrVars)) {
+                this.variables.push({
+                    name,
+                    defaultValue: value,
+                    type
+                })
+            }
+        }
     }
     
     get MentionRegExp() {
@@ -87,7 +115,27 @@ module.exports = class Bot {
     }
     
     login(token) {
-        this.client.login(token || this.options.token)
+        if (this.variables.length) {
+            this.variables.unshift({
+                name: "type",
+                value: null,
+                type: "string"
+            })
+            
+            this.db.createTable({
+                name: "main",
+                rows: this.variables
+            })
+        }
+        
+        this.db.once("ready", () => {
+            console.log("Database ready!")
+            this.client.once("ready", () => {
+                console.log("Client ready!")
+            })
+            this.client.login(this.options.token || token)
+        })
+        this.db.connect()
     }
     
     addEvent(eventOrEvents = []) {
