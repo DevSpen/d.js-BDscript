@@ -41,6 +41,8 @@ module.exports = {
             
             d.container.data = {
                 top,
+                tag: user.tag,
+                valueWithSeparator: val[variable].toLocaleString?.(),
                 position: top,
                 userID: id,
                 mention: `<@${id}>`,
