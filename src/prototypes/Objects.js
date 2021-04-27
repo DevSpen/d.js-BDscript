@@ -28,6 +28,7 @@ Object.prototype.resolveArray = async function() {
 }
 
 Object.prototype.fieldsIn = function (code) {
+    code = String(code)
     return this.value.fields.filter(f => code.includes(this.client.bot.snowflake(f.id)))
 }
 
