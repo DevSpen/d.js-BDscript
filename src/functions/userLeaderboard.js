@@ -22,8 +22,7 @@ module.exports = {
         if (!custom) return d.sendError(":x: no leaderboard info specified!")
         
         const data = await d.client.bot.db.all("main", {
-            variable: "type",
-            startsWith: "member",
+            where: `type = 'member' AND id like '%${d.message?.guild?.id}'`,
             sortType: sort.toUpperCase(),
             sort: variable, 
             limit: Number(limit),
