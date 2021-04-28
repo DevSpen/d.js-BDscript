@@ -1,4 +1,5 @@
 const operators = require("../utils/operators")
+const condition = require("../utils/condition")
 
 module.exports = {
     name: "$onlyIf",
@@ -12,8 +13,6 @@ module.exports = {
         
         if (!operator) return d.sendError(`:x: Invalid operator in \`$onlyIf\``)
         
-        let pass = false
-        
         const values = condition.split(operator)
         
         let [value1, value2] = values 
@@ -22,26 +21,7 @@ module.exports = {
         
         value2 = await d.resolveCode(value2)
         
-        if (!["!=", "=="].includes(operator)) {
-            value1 = Number(value1)
-            value2 = Number(value2)
-            
-            if (isNaN(value1) || isNaN(value2)) return d.sendError(`:x: Invalid number in \`$onlyIf\``)
-        }
-        
-        if (operator === "==") {
-            if (value1 === value2) pass = true
-        } else if (operator === "!=") {
-            if (value1 !== value2) pass = true
-        } else if (operator === "<") {
-            if (value1 < value2) pass = true
-        } else if (operator === "<=") {
-            if (value1 <= value2) pass = true 
-        } else if (operator === ">") {
-            if (value1 > value2) pass = true
-        } else if (operator === ">=") {
-            if (value1 >= value2) pass = true
-        }
+        let pass = condition(value1, operator, value2)
         
         if (!pass) {
             return d.deflate(d.value.id, "", flds, code.join(";")) 
