@@ -85,7 +85,8 @@ Object.prototype.sendError = function (...error) {
 }
 
 Object.prototype.resolveCode = async function(code) {
-    const fields = this.fieldsIn(code) 
+    const fields = this.fieldsIn(code)
+    if (!fields.length) return code 
     return await this.resolveFields(fields, code)
 }
 

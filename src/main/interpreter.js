@@ -23,6 +23,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     data.container = {
         randoms: {},
         randomTexts: {}, 
+        splits: [], 
         randomStrings: {}, 
         requests: {}, 
         array: pointer === "code" ? data.command.compiled.data : data.command.compiledName.data, 
