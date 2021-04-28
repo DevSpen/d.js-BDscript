@@ -36,6 +36,10 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
         if (!res) return undefined
         else {
             data.container.code = data.container.code.replace(res.id, res.with)
+            if (data.container.return) {
+                return undefined
+            }
+            
             if (res.stop) {
                 data.container.code = await data.resolveFields(res.stop, res.code)
                 break
