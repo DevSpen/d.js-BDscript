@@ -30,7 +30,7 @@ module.exports = {
         }
         
         try {
-            var evaled = eval(code)
+            var evaled = await eval(code)
         } catch (e) {
             evaled = e
         }

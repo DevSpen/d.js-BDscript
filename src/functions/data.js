@@ -6,7 +6,7 @@ module.exports = {
         
         if (prop === undefined) return 
         
-        const val = d.container.data?.[prop]
+        const val = eval(`d.container.${d.container.pointTo || "data"}?.${prop}`) 
         
         if (val === undefined) return d.sendError(`:x: No data '${prop}' found!`)
         

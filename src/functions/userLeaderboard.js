@@ -42,7 +42,9 @@ module.exports = {
             
             const user = await d.client.users.fetch(id) 
             
-            d.container.data = {
+            d.container.pointTo = "userLb"
+            
+            d.container.userLb = {
                 top,
                 tag: user.tag,
                 valueWithSeparator: val[variable].toLocaleString?.(),
@@ -61,8 +63,6 @@ module.exports = {
             
             top++ 
         }
-        
-        delete d.container.data 
         
         return d.deflate(content.join(separator))
     }
