@@ -17,7 +17,9 @@ module.exports = {
         
         if (property === undefined || url === undefined) return undefined
         
-        const request = await axios.get(url).catch(err => err)
+        const request = d.container.requests?.[url] || await axios.get(url).catch(err => err)
+        
+        d.container.requests[url] = request 
         
         if (request.isAxiosError) {
             d.container.http = request 

@@ -35,7 +35,7 @@ module.exports = class Bot {
         
         Object.defineProperty(this, "interpreter", {
             writable: false,
-            value: (data, rCode) => interpreter(this.client, data, rCode)
+            value: (data, rCode, pointer) => interpreter(this.client, data, rCode, pointer)
         })
         
         Object.defineProperty(this, "parser", {

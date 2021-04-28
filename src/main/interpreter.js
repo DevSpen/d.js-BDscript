@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 
-module.exports = async (client, data = {}, returnCode = false) => {
+module.exports = async (client, data = {}, returnCode = false, pointer = "code") => {
     const command = data.command 
     
     if (!command) return undefined 
@@ -17,16 +17,16 @@ module.exports = async (client, data = {}, returnCode = false) => {
     
     data.startedAt = Date.now() 
     
-    data.channel = data.channel || data.message.channel
+    data.channel = data.channel || data.message?.channel
     
-    data.mainChannel = data.message.channel 
-    
+    data.mainChannel = data.message?.channel 
     data.container = {
         randoms: {},
         randomTexts: {}, 
         randomStrings: {}, 
-        array: data.command.compiled.data,
-        code: data.command.compiled.code, 
+        requests: {}, 
+        array: pointer === "code" ? data.command.compiled.data : data.command.compiledName.data, 
+        code: pointer === "code" ? data.command.compiled.code : data.command.compiledName.code, 
         embed: new Discord.MessageEmbed() 
     }
     
