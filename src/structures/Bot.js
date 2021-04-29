@@ -7,6 +7,7 @@ const ResolveAPIMessage = require("../main/resolveAPIMessage")
 const interpreter = require("../main/interpreter")
 const Parser = require("../main/parser")
 const Compile = require("../main/compiler")
+const parse = require("parse-ms")
 
 require("../prototypes/Strings")
 require("../prototypes/Objects")
@@ -87,6 +88,13 @@ module.exports = class Bot {
         return new RegExp(`^<@!?${this.client.user?.id}>`)
     }
     
+    parse(ms) {
+        return Object.entries(parse(ms)).map((a, y) => {
+            if (a[1] && y < 4) return `${a[1]} ${a[0]}`
+            else return undefined
+        }).filter(a => a).join(" ")
+    }
+    
     _resolve(options) {
         if (!options.prefix) throw new Error("Prefix was not given.")
         
@@ -132,6 +140,23 @@ module.exports = class Bot {
     }
     
     login(token) {
+        this.db.createTable({
+            name: "cooldowns",
+            rows: [{
+                name: "startedAt",
+                type: "integer",
+                defaultValue: 0
+            }, {
+                name: "type",
+                type: "string",
+                defaultValue: ""
+            }, {
+                name: "time",
+                type: "integer",
+                defaultValue: 0 
+            }]
+        })
+        
         if (this.variables.length) {
             this.variables.unshift({
                 name: "type",
