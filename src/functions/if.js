@@ -33,6 +33,12 @@ module.exports = {
             if (c === undefined) return undefined
             
             return d.deflate(c) 
+        } else if (!pass && elseCode) {
+            const c = await d.resolveCode(elseCode)
+            
+            if (c === undefined) return undefined
+            
+            return d.deflate(c) 
         }
         
         return d.deflate() 

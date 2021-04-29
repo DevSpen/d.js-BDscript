@@ -82,7 +82,7 @@ module.exports = class Bot {
     }
     
     get MentionRegExp() {
-        return new RegExp(`<@!?${this.client.user?.id}>`)
+        return new RegExp(`^<@!?${this.client.user?.id}>`)
     }
     
     _resolve(options) {
