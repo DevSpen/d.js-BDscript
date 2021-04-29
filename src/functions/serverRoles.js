@@ -18,6 +18,6 @@ module.exports = {
         
         if (!guild) return d.sendError("guildID", guildID)
         
-        return d.deflate(guild.roles.cache.filter(r => r.id !== guild.id).sort((x, y) => sort === "yes" ? y.position - x.position : true).map(r => option === "mention" ? r.toString() : r[option] ?? "").join(separator))
+        return d.deflate(option === "count" ? guild.roles.cache.size : guild.roles.cache.filter(r => r.id !== guild.id).sort((x, y) => sort === "yes" ? y.position - x.position : true).map(r => option === "mention" ? r.toString() : r[option] ?? "").join(separator))
     }
 }
