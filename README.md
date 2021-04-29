@@ -1,9 +1,11 @@
 # d.js-BDscript #
 ## REQUIRES NODEJS VERSION 14 OR EARLIER ##
 ---------------------------------
-Install using `npm i https://github.com/Rubenennj/d.js-BDscript`
+Want to use beta version of the package? Use `npm i https://github.com/Rubenennj/d.js-BDscript` to install upcoming updates.
 
 Inspired in [Bot Designer For Discord](https://discord.gg/bot)
+
+Need help? Or hang out with other users who use this package? Then don't hesitate to join [here](https://discord.gg/G2DEf4TV)!
 
 # Base for a d.js-BDscript bot #
 ---------------------------------

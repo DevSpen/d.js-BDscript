@@ -5,6 +5,10 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     
     if (!command) return undefined 
     
+    if (client.bot.options.users && !client.bot.options.users.includes(data.message?.author?.id)) {
+        return undefined
+    }
+    
     if (client.bot.options.respondToBots === false && data.message?.author?.bot === true) {
         return undefined
     }
