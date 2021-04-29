@@ -2,7 +2,7 @@ module.exports = {
     name: "$onlyForIDs",
     brackets: true,
     execute: async d => {
-        const ids = d.value.splits 
+        const ids = [...d.value.splits]
         
         const error = ids.pop()
         

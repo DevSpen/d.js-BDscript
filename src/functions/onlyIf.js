@@ -1,5 +1,5 @@
 const operators = require("../utils/operators")
-const condition = require("../utils/condition")
+const check = require("../utils/condition")
 
 module.exports = {
     name: "$onlyIf",
@@ -21,7 +21,7 @@ module.exports = {
         
         value2 = await d.resolveCode(value2)
         
-        let pass = condition(value1, operator, value2)
+        let pass = check(value1, operator, value2)
         
         if (!pass) {
             return d.deflate(d.value.id, "", flds, code.join(";")) 

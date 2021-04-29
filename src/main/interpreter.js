@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 
 module.exports = async (client, data = {}, returnCode = false, pointer = "code") => {
-    const command = data.command 
+    const command = data.command
     
     if (!command) return undefined 
     
@@ -31,8 +31,8 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
         splits: [], 
         randomStrings: {}, 
         requests: {}, 
-        array: pointer === "code" ? data.command.compiled.data : data.command.compiledName.data, 
-        code: pointer === "code" ? data.command.compiled.code : data.command.compiledName.code, 
+        array: pointer === "code" ? command.compiled.data : command.compiledName.data, 
+        code: pointer === "code" ? command.compiled.code : command.compiledName.code, 
         embed: new Discord.MessageEmbed() 
     }
     
