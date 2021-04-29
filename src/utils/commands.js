@@ -10,5 +10,9 @@ module.exports = {
     joinCommand: {
         channel: true,
         code: true
+    },
+    leaveCommand: {
+        channel: true,
+        code: true
     }
 }
