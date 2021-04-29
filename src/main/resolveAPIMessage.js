@@ -1,4 +1,4 @@
-module.exports = async (channel, container, cnt) => {
+module.exports = async (channel, container, cnt, fn = "send") => {
     const options = {} 
     
     const content = cnt || container.code
@@ -9,7 +9,7 @@ module.exports = async (channel, container, cnt) => {
     
     if (container.attachment) options.attachment = container.attachment
     
-    const message = await channel.send(content, options).catch(err => null) 
+    const message = await channel[fn](content, options).catch(err => null) 
     
     return message 
 }
