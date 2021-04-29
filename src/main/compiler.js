@@ -18,7 +18,7 @@ module.exports = (client, code) => {
             continue
         }
         
-        const snowflake = Math.floor(Math.random() * 1000000000)
+        const snowflake = Math.floor(Math.random() * 100000000000)
         
         const fn = client.bot.parser[fns[0]]
         
@@ -26,7 +26,9 @@ module.exports = (client, code) => {
         
         const afterFunc = compiled.split(fn.name)[r] 
         
-        if (fn.brackets && !fn.optional && !afterFunc.includes("]")) throw new Error(`${afterFunc.slice(0,15)}...\n^^^^ Missing ] after argument list`)
+        if (fn.brackets && !fn.optional && afterFunc[0] !== "[") throw new Error(`${fn.name}${afterFunc.slice(0,15)}...\n^^^^ Missing [ before argument list`)
+        
+        if (fn.brackets && !fn.optional && !afterFunc.includes("]")) throw new Error(`${fn.name}${afterFunc.slice(0,15)}...\n^^^^ Missing ] after argument list`)
         
         if (fn.brackets && afterFunc[0] === "[") {
             const inside = afterFunc.slice(1).split("]")[0]

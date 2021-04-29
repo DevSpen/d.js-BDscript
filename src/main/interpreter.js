@@ -22,6 +22,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     data.mainChannel = data.message?.channel 
     data.container = {
         randoms: {},
+        keywords: {}, 
         randomTexts: {}, 
         splits: [], 
         randomStrings: {}, 

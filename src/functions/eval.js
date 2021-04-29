@@ -9,7 +9,11 @@ module.exports = {
         
         const code = array.join(";")
         
-        const compiled = d.client.bot.compile(d.client, code)
+        try {
+            var compiled = d.client.bot.compile(d.client, code)
+        } catch(err) {
+            return d.sendError(err.message)
+        }
         
         let newData = d.clone("command", {compiled}) 
         
