@@ -22,6 +22,8 @@ module.exports = {
         
         const channel = d.client.channels.cache.get(channelID)
         
+        if (channel === undefined) return d.sendError("channel ID", channelID)
+        
         messageID = await d.resolveCode(messageID)
         
         if (messageID === undefined) return 
@@ -29,8 +31,6 @@ module.exports = {
         const msg = await channel.messages.fetch(messageID).catch(err => null) 
         
         if (!msg) return d.sendError("messageID", messageID)
-        
-        if (channel === undefined) return d.sendError("channel ID", channelID)
         
         filter = await d.resolveCode(filter)
         

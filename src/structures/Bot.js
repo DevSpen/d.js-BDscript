@@ -14,7 +14,9 @@ require("../prototypes/Arrays")
 
 module.exports = class Bot {
     constructor(options = {}) {
-        this.client = new Discord.Client(options.client)
+        this.client = new Discord.Client({
+            partials: ["GUILD_MEMBER", "CHANNEL", "MESSAGE", "USER", "REACTION"]
+        })
         
         this.commands = new Discord.Collection() 
         
