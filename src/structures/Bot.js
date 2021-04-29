@@ -61,17 +61,23 @@ module.exports = class Bot {
     
     variable(varOrVars) {
         if (Array.isArray(varOrVars)) {
-            return varOrVars.map(v => this.variables.push(v))
+            return varOrVars.map(v => this.variables.push(this.resolveVar(v))) 
         } else {
             if (varOrVars.name) {
-                return this.variables.push(varOrVars)
+                return this.variables.push(this.resolveVar(varOrVars)) 
             } else for (const [name, { type, value }] of Object.entries(varOrVars)) {
-                this.variables.push({
-                    name,
-                    defaultValue: value,
-                    type
-                })
+                this.variables.push(this.resolveVar({
+                    name, type, value
+                }))
             }
+        }
+    }
+    
+    resolveVar(data) {
+        return {
+            name: data.name,
+            type: data.type === "string" ? "text" : data.type,
+            defaultValue: data.value 
         }
     }
     
@@ -127,8 +133,8 @@ module.exports = class Bot {
         if (this.variables.length) {
             this.variables.unshift({
                 name: "type",
-                value: null,
-                type: "string"
+                defaultValue: "", 
+                type: "text"
             })
             
             this.db.createTable({
