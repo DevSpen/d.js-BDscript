@@ -12,7 +12,7 @@ module.exports = {
     }, {
         name: "error",
         type: "string",
-        code: "the code to execute when the condition is false"
+        description: "the code to execute when the condition is false"
     }],
     execute: async d => {
         const [condition, ...code] = d.value.splits 

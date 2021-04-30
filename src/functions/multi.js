@@ -1,6 +1,7 @@
 module.exports = {
     name: "$multi",
     brackets: true, 
+    description: "multiply numbers",
     fields: [{
         name: "numbers",
         description: "number or numbers to multiply, separated by `;`",

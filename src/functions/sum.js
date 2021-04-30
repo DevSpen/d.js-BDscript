@@ -1,6 +1,7 @@
 module.exports = {
     name: "$sum",
     brackets: true, 
+    description: "add numbers to others",
     fields: [{
         name: "numbers",
         description: "number or numbers to add, separated by `;`",

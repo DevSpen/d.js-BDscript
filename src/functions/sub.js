@@ -1,6 +1,7 @@
 module.exports = {
     name: "$sub",
     brackets: true, 
+    description: "subtract numbers from others",
     fields: [{
         name: "numbers",
         description: "number or numbers to substract, separated by `;`",
