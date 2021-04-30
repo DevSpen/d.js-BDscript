@@ -5,11 +5,11 @@ module.exports ={
     fields: [{
         name: "guildID",
         type: "string",
-        value: "the guild to get the IDs from"
+        description: "the guild to get the IDs from"
     }, {
         name: "separator",
         type: "string",
-        value: "the separator to separate each ID"
+        description: "the separator to separate each ID"
     }],
     returns: "?string",
     execute: async d => {

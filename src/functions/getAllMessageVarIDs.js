@@ -5,7 +5,7 @@ module.exports ={
     fields: [{
         name: "separator",
         type: "string",
-        value: "the separator to separate each ID"
+        description: "the separator to separate each ID"
     }],
     returns: "?string",
     execute: async d => {

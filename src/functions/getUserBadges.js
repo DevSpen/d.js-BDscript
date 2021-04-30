@@ -6,7 +6,7 @@ module.exports = {
     fields: [{
         name: "userID",
         type: "string",
-        value: "the user to get the badges from"
+        description: "the user to get the badges from"
     }, {
         name: "separator",
         description: "the separator for each badge",

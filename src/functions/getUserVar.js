@@ -4,15 +4,15 @@ module.exports = {
     fields: [{
         name: "variable",
         type: "string",
-        value: "the variable name"
+        description: "the variable name"
     }, {
         name: "userID",
         type: "string",
-        value: "the user to get the variable value from"
+        description: "the user to get the variable value from"
     }, {
         name: "guildID",
         type: "string",
-        value: "the guild to get this users variable value from"
+        description: "the guild to get this users variable value from"
     }],
     returns: "?number|?string",
     brackets: true,

@@ -5,7 +5,7 @@ module.exports = {
     fields: [{
         name: "variable",
         type: "string",
-        description: ""
+        description: "the variable name"
     }, {
         name: "sortType",
         type: "string",

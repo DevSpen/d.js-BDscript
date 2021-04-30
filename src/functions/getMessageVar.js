@@ -5,11 +5,11 @@ module.exports = {
     fields: [{
         name: "variable",
         type: "string",
-        value: "the variable name"
+        description: "the variable name"
     }, {
         name: "messageID",
         type: "string",
-        value: "the message to get the variable value from"
+        description: "the message to get the variable value from"
     }],
     returns: "?number|?string",
     execute: async d => {

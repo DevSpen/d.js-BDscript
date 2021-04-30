@@ -10,7 +10,7 @@ module.exports = {
     }, {
         name: "code",
         type: "string",
-        code: "the code to eval", 
+        description: "the code to eval", 
     }],
     execute: async d => {
         const array = await d.resolveArray() 

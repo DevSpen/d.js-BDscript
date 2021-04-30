@@ -5,11 +5,11 @@ module.exports = {
     fields: [{
         name: "variable",
         type: "string",
-        value: "the variable name"
+        description: "the variable name"
     }, {
         name: "guildID",
         type: "string",
-        value: "the server to get the variable value from"
+        description: "the server to get the variable value from"
     }],
     returns: "?number|?string",
     execute: async d => {

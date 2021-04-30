@@ -8,11 +8,11 @@ module.exports = {
     fields: [{
         name: "option",
         type: "string",
-        code: "the user ID, mention or username"
+        description: "the user ID, mention or username"
     }, {
         name: "returnAuthorID",
         type: "boolean",
-        code: `whether to return the author ID if no user was found`
+        description: `whether to return the author ID if no user was found`
     }],
     execute: async d => {
         const [
