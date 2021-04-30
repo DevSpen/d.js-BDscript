@@ -1,5 +1,23 @@
 module.exports = {
     name: "$setUserVar",
+    description: "sets a server user variable value",
+    fields: [{
+        name: "variable",
+        type: "string",
+        description: "the variable to set the value to"
+    }, {
+        name: "value",
+        type: "any",
+        description: "the value to set this for this variable"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user ID to set this variable value to" 
+    }, {
+        name: "guildID",
+        type: "string",
+        description: "the guild ID to set this variable value to"
+    }],
     brackets: true,
     execute: async d => {
         const [

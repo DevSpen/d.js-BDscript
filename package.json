@@ -1,6 +1,6 @@
 {
   "name": "d.js-bdscript",
-  "version": "2.6.1",
+  "version": "3.0.0",
   "description": "A completely new language inspired in BDFD (Bot Designer For Discord), this package allows you to interact with the Discord API and uses the discord.js framework as a wrapper to it.",
   "main": "./src/index.js",
   "scripts": {

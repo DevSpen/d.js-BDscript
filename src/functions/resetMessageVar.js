@@ -1,6 +1,12 @@
 module.exports = {
     name: "$resetMessageVar",
     brackets: true,
+    fields: [{
+        name: "variable",
+        type: "string",
+        description: "the variable to reset"
+    }],
+    description: "reset a message variable value",
     execute: async d => {
         const [
             variable

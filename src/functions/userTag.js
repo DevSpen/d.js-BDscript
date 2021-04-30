@@ -2,6 +2,13 @@ module.exports = {
     name: "$userTag",
     optional: true,
     brackets: true,
+    description: "the user's tag",
+    fields: [{
+        name: "userID",
+        type: "string",
+        description: "the user to get the tag"
+    }],
+    returns: "?string",
     execute: async d => {
         if (d.value.inside) {
             const userID = await d.resolveAll()

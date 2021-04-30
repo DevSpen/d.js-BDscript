@@ -1,6 +1,17 @@
 module.exports = {
     name: "$mentioned",
     brackets: true,
+    description: "returns mentioned user ID",
+    returns: "?string",
+    fields: [{
+        name: "mention number",
+        type: "number",
+        description: "the mentioned user's ID to return"
+    }, {
+        name: "displayAuthorID",
+        type: "boolean",
+        description: "whether to return the author ID if no mention was found"
+    }],
     execute: async d => {
         if (d.value.fields.length) {
             const [n, displayAuthorID = "no"] = (await d.resolveArray()) || []

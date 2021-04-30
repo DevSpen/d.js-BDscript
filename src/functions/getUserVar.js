@@ -1,5 +1,20 @@
 module.exports = {
     name: "$getUserVar",
+    description: "gets a server user variable value",
+    fields: [{
+        name: "variable",
+        type: "string",
+        value: "the variable name"
+    }, {
+        name: "userID",
+        type: "string",
+        value: "the user to get the variable value from"
+    }, {
+        name: "guildID",
+        type: "string",
+        value: "the guild to get this users variable value from"
+    }],
+    returns: "?number|?string",
     brackets: true,
     execute: async d => {
         const [

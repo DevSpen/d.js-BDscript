@@ -1,6 +1,13 @@
 module.exports = {
     name: "$username",
     optional: true,
+    description: "the user's username",
+    fields: [{
+        name: "userID",
+        type: "string",
+        description: "the user to get the username"
+    }],
+    returns: "?string",
     brackets: true,
     execute: async d => {
         if (d.value.inside) {

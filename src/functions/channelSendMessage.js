@@ -2,6 +2,17 @@ module.exports = {
     name: "$channelSendMessage",
     brackets: true,
     optional: true,
+    description: "sends a message to a specific channel.",
+    returns: "string",
+    fields: [{
+        name: "channelID",
+        type: "string",
+        description: "the channel to send this message to"
+    }, {
+        name: "message",
+        description: "the content for this message",
+        type: "string"
+    }],
     execute: async d => {
         let [
             channelID,

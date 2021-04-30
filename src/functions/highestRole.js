@@ -1,6 +1,17 @@
 module.exports = {
     name: "$highestRole",
     brackets: true,
+    returns: "?string",
+    description: "returns the user's highest role ID",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to check in"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to get the role from"
+    }],
     optional: true,
     execute: async d => {
         if (d.value.inside) {

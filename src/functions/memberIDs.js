@@ -1,5 +1,24 @@
 module.exports = {
     name: "$memberIDs",
+    description: "returns the cached member IDs of a guild",
+    fields: [{
+        name: "guildID",
+        description: "the guild to list members from",
+        type: "string"
+    }, {
+        name: "option",
+        description: "the property to return for each member, could be `mention`, `name`, `id`...",
+        type: "string"
+    }, {
+        name: "separator",
+        description: "the separator for each member",
+        type: "string"
+    }, {
+        name: "countBots",
+        description: "whether to return bots too",
+        type: "boolean"
+    }],
+    returns: "?string",
     brackets: true,
     optional: true,
     execute: async d => {

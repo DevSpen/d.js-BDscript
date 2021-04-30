@@ -4,6 +4,21 @@ module.exports = {
     name: "$userPerms",
     brackets: true,
     optional: true,
+    description: "return all the user perms in a guild",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to list user perms from"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to list perms from"
+    }, {
+        name: "override",
+        type: "boolean",
+        description: "whether to only return Administrator if the user"
+    }],
+    returns: "?string", 
     execute: async d => {
         if (d.value.inside) {
             const [

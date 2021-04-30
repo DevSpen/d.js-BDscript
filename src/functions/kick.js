@@ -1,6 +1,20 @@
 module.exports = {
     name: "$kick",
     brackets: true,
+    description: "kick an user from a guild",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to kick the user from"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to kick"
+    }, {
+        name: "reason",
+        type: "string",
+        description: "the reason for kicking this user"
+    }],
     execute: async d => {
         const [
             guildID,

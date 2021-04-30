@@ -1,6 +1,29 @@
 module.exports = {
     name: "$userRoles",
     brackets: true,
+    description: "returns all the roles for this user",
+    returns: "?string",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to list user roles from"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to list roles from"
+    }, {
+        name: "option",
+        type: "string",
+        description: "the property to return for each user role, can be `name`, `mention`, `id`, etc..."
+    }, {
+        name: "separator",
+        type: "string",
+        description: "the separator for each role"
+    }, {
+        name: "sort",
+        type: "boolean",
+        description: "whether to sort the roles by position"
+    }],
     optional: true,
     execute: async d => {
         if (d.value.inside) {

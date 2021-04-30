@@ -1,5 +1,20 @@
 module.exports = {
     name: "$sendDM",
+    fields: [{
+        name: "userID",
+        type: "string",
+        description: "the user to send this message to"
+    }, {
+        name: "message",
+        type: "string",
+        description: "the message to send to this user"
+    }, {
+        name: "returnMessageID",
+        description: "whether to return the DM message ID",
+        type: "boolean"
+    }],
+    returns: "?string",
+    description: "sends a DM to an user",
     brackets: true,
     execute: async d => {
         const [

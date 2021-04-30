@@ -4,6 +4,13 @@ const cond = require("../utils/condition")
 module.exports = {
     name: "$checkCondition",
     brackets: true,
+    description: "checks whether given condition is false or true",
+    returns: "boolean",
+    fields: [{
+        name: "condition",
+        type: "string",
+        description: "the condition to check"
+    }],
     execute: async d => {
         const condition = d.value.splits[0]
         

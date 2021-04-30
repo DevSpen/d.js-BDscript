@@ -2,6 +2,21 @@ module.exports = {
     name: "$userAvatar",
     optional: true,
     brackets: true,
+    description: "return user avatar url",
+    fields: [{
+        name: "userID",
+        type: "string",
+        description: "the user to get the avatar from"
+    }, {
+        name: "size",
+        type: "number",
+        description: "the size for the avatar"
+    }, {
+        name: "dynamic",
+        type: "boolean",
+        description: "whether the avatar should be animated if its a gif"
+    }],
+    returns: "string", 
     execute: async d => {
         if (d.value.inside) {
             const [

@@ -2,6 +2,13 @@ module.exports = {
     name: "$serverName",
     brackets: true,
     optional: true,
+    returns: "?string",
+    description: "the name for this guild",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to return the name from", 
+    }],
     execute: async d => {
         if (d.value.inside) {
             const guildID = await d.resolveAll()

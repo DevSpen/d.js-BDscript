@@ -1,17 +1,17 @@
 module.exports = {
     name: "$multi",
     brackets: true, 
+    fields: [{
+        name: "numbers",
+        description: "number or numbers to multiply, separated by `;`",
+        type: "number"
+    }],
+    returns: "?number",
     execute: async d => {
-        const { value } = d 
+        const numbers = await d.resolveArray()
         
-        if (value.fields.length) {
-            value.inside = await d.resolveAll()
-            
-            if (!value.inside) return undefined 
-            
-            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) * Number(y))) 
-        } else {
-            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) * Number(y))) 
-        }
+        if (numbers === undefined) return 
+        
+        return d.deflate(numbers.reduce((x, y) => Number(x) * Number(y), 0))
     }
 }

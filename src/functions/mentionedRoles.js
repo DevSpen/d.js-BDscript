@@ -1,5 +1,12 @@
 module.exports = {
     name: "$mentionedRoles",
+    description: "returns mentioned role ID",
+    returns: "?string",
+    fields: [{
+        name: "mention number",
+        type: "number",
+        description: "the mentioned role's ID to return"
+    }],
     brackets: true,
     execute: async d => {
         if (d.value.fields.length) {

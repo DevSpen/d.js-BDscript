@@ -1,6 +1,20 @@
 module.exports = {
     name: "$setMessageVar",
     brackets: true,
+    description: "sets a message variable value",
+    fields: [{
+        name: "variable",
+        type: "string",
+        description: "the variable to set the value to"
+    }, {
+        name: "value",
+        type: "any",
+        description: "the value to set this for this variable"
+    }, {
+        name: "messageID",
+        type: "string",
+        description: "the message ID to set this variable value to" 
+    }],
     execute: async d => {
         const [
             variable,

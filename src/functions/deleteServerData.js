@@ -1,5 +1,12 @@
 module.exports = {
     name: "$deleteServerData",
+    description: "deletes all the variable values for given server",
+    brackets: true,
+    fields: [{
+        name: "guildID",
+        description: "the server to delete the data from",
+        type: "string"
+    }],
     brackets: true,
     execute: async d => {
         const [

@@ -1,5 +1,16 @@
 module.exports = {
     name: "$random",
+    returns: "number",
+    fields: [{
+        name: "min",
+        description: "the min value that can be returned",
+        type: "number"
+    }, {
+        name: "max",
+        description: "the max value that can be returned",
+        type: "number"
+    }],
+    description: "returns a random number between min and max",
     brackets: true,
     execute: async d => {
         let [min, max, decimals = false] = (await d.resolveArray()) || []

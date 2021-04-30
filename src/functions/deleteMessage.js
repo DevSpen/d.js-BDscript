@@ -1,6 +1,16 @@
 module.exports = {
     name: "$deleteMessage",
     brackets: true,
+    fields: [{
+        name: "channelID",
+        type: "string",
+        description: "the channel where this message is in"
+    }, {
+        name: "messageID",
+        type: "string",
+        description: "the message to delete"
+    }],
+    description: "deletes a message",
     execute: async d => {
         const [
             channelID,

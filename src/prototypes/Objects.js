@@ -91,7 +91,7 @@ Object.prototype.resolveCode = async function(code) {
 }
 
 Object.prototype.resolveFields = async function(fields, code) {
-    let text = code || this.value.inside 
+    let text = code ?? this.value.inside 
     
     for (const val of fields) {
         let data = Object.assign(Object.create(this), this)

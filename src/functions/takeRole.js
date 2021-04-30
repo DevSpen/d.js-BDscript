@@ -1,6 +1,24 @@
 module.exports = {
     name: "$takeRole",
     brackets: true,
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild where we want to take a role"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to take the role from"
+    }, {
+        name: "roleID",
+        type: "string",
+        description: "the role to take"
+    }, {
+        name: "reason",
+        type: "string",
+        description: "the reason for removing this role"
+    }],
+    description: "takes a role from an user in a guild",
     execute: async d => {
         const [
             guildID,

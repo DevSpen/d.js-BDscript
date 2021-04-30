@@ -1,6 +1,17 @@
 module.exports = {
     name: "$roleID",
+    description: "returns a role ID of a guild", 
     brackets: true,
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to get the role ID from"
+    }, {
+        name: "role name",
+        type: "string",
+        description: "the name of the role"
+    }], 
+    returns: "string",
     execute: async d => {
         const [
             guildID,

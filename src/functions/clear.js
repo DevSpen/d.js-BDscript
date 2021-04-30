@@ -1,5 +1,24 @@
 module.exports = {
     name: "$clear",
+    description: "clear an amount of messages in a channel",
+    returns: "?number",
+    fields: [{
+        name: "channelID",
+        type: "string",
+        description: "the ID for this channel"
+    }, {
+        name: "amount",
+        type: "number",
+        description: "the amount of messages to delete"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the ID of the user to delete messages"
+    }, {
+        name: "showTotal",
+        type: "boolean",
+        description: "Whether or not return the amount of messages that were actually deleted"
+    }],
     brackets: true,
     execute: async d => {
         const [

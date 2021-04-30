@@ -1,5 +1,16 @@
 module.exports = {
     name: "$mentionedChannels",
+    description: "returns mentioned channel ID",
+    returns: "?string",
+    fields: [{
+        name: "mention number",
+        type: "number",
+        description: "the mentioned channel's ID to return"
+    }, {
+        name: "displayChannelID",
+        type: "boolean",
+        description: "whether to return current channel ID if no mention was found"
+    }],
     brackets: true,
     execute: async d => {
         if (d.value.fields.length) {

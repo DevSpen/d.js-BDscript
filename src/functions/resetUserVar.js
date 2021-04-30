@@ -1,6 +1,16 @@
 module.exports = {
     name: "$resetUserVar",
     brackets: true,
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to reset the variable in" 
+    }, {
+        name: "variable",
+        type: "string",
+        description: "the variable to reset"
+    }],
+    description: "reset a server users variable value",
     execute: async d => {
         const [
             guildID,

@@ -1,6 +1,20 @@
 module.exports = {
     name: "$addMessageReactions",
     brackets: true,
+    description: "add reactions to a message",
+    fields: [{
+        name: "channelID",
+        description: "the channel where thid message was sent in",
+        type: "string"
+    }, {
+        name: "messageID",
+        description: "the message to react to",
+        type: "string"
+    }, {
+        name: "emoji",
+        description: "the emoji to react with",
+        type: "string"
+    }],
     execute: async d => {
         const [
             channelID,

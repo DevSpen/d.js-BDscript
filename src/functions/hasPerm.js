@@ -2,6 +2,21 @@ const DiscordUtil = require("../utils/discord")
 
 module.exports = {
     name: "$hasPerm",
+    returns: "boolean",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild the user is in"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to check for permissions"
+    }, {
+        name: "permissions",
+        type: "string",
+        description: "the permission or permissions to check for separated by `;`"
+    }],
+    description: "checks whether a user has given permissions",
     brackets: true,
     execute: async d => {
         const [

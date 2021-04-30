@@ -1,6 +1,17 @@
 module.exports = {
     name: "$getServerVar",
     brackets: true,
+    description: "gets a server variable value",
+    fields: [{
+        name: "variable",
+        type: "string",
+        value: "the variable name"
+    }, {
+        name: "guildID",
+        type: "string",
+        value: "the server to get the variable value from"
+    }],
+    returns: "?number|?string",
     execute: async d => {
         const [
             variable,

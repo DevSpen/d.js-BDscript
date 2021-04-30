@@ -1,6 +1,17 @@
 module.exports = {
     name: "$textSplitMap",
     brackets: true,
+    returns: "?string", 
+    description: "creates a loop over every element of $textSplit, $data contains `value` which will be the value of each element",
+    fields: [{
+        name: "separator",
+        type: "string",
+        description: "the separator for each loop output"
+    }, {
+        name: "code",
+        type: "string",
+        description: "the code to execute for each element"
+    }],
     execute: async d => {
         let [separator, ...code] = d.value.splits
        

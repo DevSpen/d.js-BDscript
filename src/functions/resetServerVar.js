@@ -1,6 +1,12 @@
 module.exports = {
     name: "$resetServerVar",
     brackets: true,
+    fields: [{
+        name: "variable",
+        type: "string",
+        description: "the variable to reset"
+    }],
+    description: "reset a server variable value",
     execute: async d => {
         const [
             variable

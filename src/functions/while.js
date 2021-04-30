@@ -4,6 +4,17 @@ const operators = require("../utils/operators")
 module.exports = {
     name: "$while",
     brackets: true,
+    fields: [{
+        name: "condition",
+        type: "string",
+        description: "the condition to test on every loop lap"
+    }, {
+        name: "code",
+        type: "string",
+        description: "the code to execute on every loop lap until the condition is met"
+    }],
+    description: "executes a code until given condition is met",
+    returns: "?string", 
     execute: async d => {
         let [
             condition,

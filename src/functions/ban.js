@@ -1,6 +1,24 @@
 module.exports = {
     name: "$ban",
     brackets: true,
+    description: "ban an user from a guild",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to ban the user from"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to ban"
+    }, {
+        name: "reason",
+        type: "string",
+        description: "the reason for banning this user"
+    }, {
+        name: "days",
+        type: "number",
+        description: "messages to delete that are newer to these days"
+    }],
     execute: async d => {
         const [
             guildID,

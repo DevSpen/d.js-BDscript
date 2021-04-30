@@ -4,6 +4,16 @@ const check = require("../utils/condition")
 module.exports = {
     name: "$onlyIf",
     brackets: true,
+    description: "checks whether a condition is met and returns an error if it is not",
+    fields: [{
+        name: "condition",
+        type: "string",
+        description: "the condition to evaluate"
+    }, {
+        name: "error",
+        type: "string",
+        code: "the code to execute when the condition is false"
+    }],
     execute: async d => {
         const [condition, ...code] = d.value.splits 
         

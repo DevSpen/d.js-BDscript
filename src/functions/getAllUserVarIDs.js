@@ -1,6 +1,17 @@
 module.exports ={
     name: "$getAllUserVarIDs",
     brackets: true,
+    description: "returns all the server user IDs that have at least one variable value assigned in the database",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        value: "the guild to get the IDs from"
+    }, {
+        name: "separator",
+        type: "string",
+        value: "the separator to separate each ID"
+    }],
+    returns: "?string",
     execute: async d => {
         const [
             guildID,

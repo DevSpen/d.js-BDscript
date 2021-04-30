@@ -1,6 +1,13 @@
 module.exports = {
     name: "$ownerID",
     brackets: true,
+    description: "returns a guild owner ID",
+    fields: [{
+        name: "guildID",
+        description: "the guild to get the owner ID from",
+        type: "string"
+    }],
+    returns: "?string",
     optional: true,
     execute: async d => {
         if (!d.value.inside) {

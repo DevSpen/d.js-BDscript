@@ -2,6 +2,25 @@ module.exports = {
     name: "$editMessage",
     brackets: true,
     optional: true,
+    fields: [{
+        name: "channelID",
+        type: "string",
+        description: "the channel where the message was sent in"
+    }, {
+        name: "messageID",
+        type: "string",
+        description: "the message to edit"
+    }, {
+        name: "message",
+        type: "string",
+        description: "the new content for this message"
+    }, {
+        name: "returnMessageID",
+        type: "boolean",
+        description: "whether to return the edited message ID"
+    }],
+    description: "edits a message",
+    returns: "?string",
     execute: async d => {
         let [
             channelID,

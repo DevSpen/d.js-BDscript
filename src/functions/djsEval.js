@@ -1,6 +1,17 @@
 module.exports = {
     name: "$djsEval",
     brackets: true,
+    returns: "?string", 
+    description: "evals a javascript code",
+    fields: [{
+        name: "output",
+        description: "whether to return the evaled code",
+        type: "boolean"
+    }, {
+        name: "code",
+        type: "string",
+        description: "the javascript code to eval"
+    }],
     execute: async d => {
         let code
         let output = false 

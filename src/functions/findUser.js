@@ -3,6 +3,17 @@ const regexes = require("../utils/regexes")
 module.exports = {
     name: "$findUser",
     brackets: true,
+    description: "finds a user by using either their ID, username or mention.",
+    returns: "string",
+    fields: [{
+        name: "option",
+        type: "string",
+        code: "the user ID, mention or username"
+    }, {
+        name: "returnAuthorID",
+        type: "boolean",
+        code: `whether to return the author ID if no user was found`
+    }],
     execute: async d => {
         const [
             option,

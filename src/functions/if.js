@@ -3,6 +3,21 @@ const cond = require("../utils/condition")
 
 module.exports = {
     name: "$if",
+    description: "checks if given condition is true and executes a code, or executes a different code if false",
+    fields: [{
+        name: "condition",
+        description: "the condition",
+        type: "string"
+    }, {
+        name: "code",
+        description: "the code to execute if the condition is true",
+        type: "string"
+    }, {
+        name: "else",
+        description: "the code to execute if the condition is false",
+        type: "string"
+    }],
+    returns: "?string",
     brackets: true,
     execute: async d => {
         const [

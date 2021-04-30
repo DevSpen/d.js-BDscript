@@ -1,6 +1,17 @@
 module.exports = {
     name: "$eval",
     brackets: true,
+    description: "evals a d.js-bdscript code",
+    returns: "?string",
+    fields: [{
+        name: "output",
+        type: "boolean|message",
+        description: "whether to return the output or eat it or send it in a new message"
+    }, {
+        name: "code",
+        type: "string",
+        code: "the code to eval", 
+    }],
     execute: async d => {
         const array = await d.resolveArray() 
         if (!array) return undefined

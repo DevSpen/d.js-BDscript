@@ -1,6 +1,20 @@
 module.exports = {
     name: "$setServerVar",
     brackets: true,
+    description: "sets a server variable value",
+    fields: [{
+        name: "variable",
+        type: "string",
+        description: "the variable to set the value to"
+    }, {
+        name: "value",
+        type: "any",
+        description: "the value to set this for this variable"
+    }, {
+        name: "guildID",
+        type: "string",
+        description: "the guild ID to set this variable value to" 
+    }],
     execute: async d => {
         const [
             variable,

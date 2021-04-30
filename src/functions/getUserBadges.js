@@ -2,6 +2,17 @@ module.exports = {
     name: "$getUserBadges",
     optional: true,
     brackets: true,
+    description: "returns the user's badges",
+    fields: [{
+        name: "userID",
+        type: "string",
+        value: "the user to get the badges from"
+    }, {
+        name: "separator",
+        description: "the separator for each badge",
+        type: "string"
+    }],
+    returns: "?string",
     execute: async d => {
         if (d.value.inside) {
             const [userID, separator = ", "] = (await d.resolveArray()) || []

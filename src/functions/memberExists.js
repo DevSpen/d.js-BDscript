@@ -3,6 +3,17 @@ const regexes = require("../utils/regexes")
 module.exports = {
     name: "$memberExists",
     brackets: true,
+    description: "check whether or not given member ID exists in a guild",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to check for the member"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the member to check for"
+    }],
+    returns: "boolean",
     execute: async d => {
         const [
             guildID, 

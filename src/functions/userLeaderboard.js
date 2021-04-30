@@ -1,6 +1,33 @@
 module.exports = {
     name: "$userLeaderboard",
     brackets: true,
+    description: "builds an server user variable leaderboard\nin customText field, you are able to use $data function which contains `mention`, `tag`, `id`, `username`, `value`, `position`, etc...",
+    fields: [{
+        name: "variable",
+        type: "string",
+        description: ""
+    }, {
+        name: "sortType",
+        type: "string",
+        description: "how to sort this leaderboard, `asc` or `desc`"
+    }, {
+        name: "customText",
+        type: "string",
+        description: "the text to use for each top",
+    }, {
+        name: "separator",
+        type: "string",
+        description: "the separator for each top"
+    }, {
+        name: "page",
+        type: "number",
+        description: "the page for the leaderboard"
+    }, {
+        name: "limit",
+        type: "number",
+        description: "the value limit to display per page"
+    }],
+    returns: "?string",
     execute: async d => {
         let [
             variable,

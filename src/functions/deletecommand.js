@@ -4,6 +4,12 @@ module.exports = {
     name: "$deletecommand",
     brackets: true,
     optional: true,
+    fields: [{
+        name: "time",
+        type: "string",
+        description: "time to wait before deleting the message"
+    }],
+    description: "deletes user's message",
     execute: async d => {
         if (d.value.inside) {
             const time = await d.resolveAll()

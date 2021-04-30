@@ -1,6 +1,16 @@
 module.exports = {
     name: "$textSplit",
     brackets: true,
+    description: "splits given text by a splitter",
+    fields: [{
+        name: "text",
+        type: "string",
+        description: "the text to split"
+    }, {
+        name: "splitter",
+        type: "string",
+        description: "the character to split text by"
+    }],
     execute: async d => {
         const [
             text,

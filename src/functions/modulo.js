@@ -1,17 +1,18 @@
 module.exports = {
     name: "$modulo",
     brackets: true, 
+    description: "returns remainder between numbers",
+    returns: "?number",
+    fields: [{
+        name: "numbers",
+        type: "number",
+        description: "the numbers to get their remainders from, separated by `;`"
+    }],
     execute: async d => {
-        const { value } = d 
+        const numbers = await d.resolveArray()
         
-        if (value.fields.length) {
-            value.inside = await d.resolveAll()
-            
-            if (!value.inside) return undefined 
-            
-            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) % Number(y))) 
-        } else {
-            return d.deflate(value.id, value.inside.split(";").reduce((x, y) => Number(x) % Number(y))) 
-        }
+        if (numbers === undefined) return 
+        
+        return d.deflate(numbers.reduce((x, y) => Number(x) % Number(y), 0))
     }
 }

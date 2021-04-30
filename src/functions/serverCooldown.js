@@ -3,6 +3,16 @@ const ms = require("ms")
 module.exports = {
     name: "$serverCooldown",
     brackets: true,
+    description: "set a server cooldown for this command, $data contains \`time\` which returns the time left before the cooldown expires.",
+    fields: [{
+        name: "duration",
+        type: "string",
+        description: "the cooldown time"
+    }, {
+        name: "error",
+        type: "string",
+        description: "the code to execute when the cooldown is enabled"
+    }],
     execute: async d => {
         let [
             time,

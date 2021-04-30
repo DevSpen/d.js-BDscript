@@ -1,6 +1,24 @@
 module.exports = {
     name: "$giveRole",
     brackets: true,
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild where we want to give a role"
+    }, {
+        name: "userID",
+        type: "string",
+        description: "the user to give the role to"
+    }, {
+        name: "roleID",
+        type: "string",
+        description: "the role to give"
+    }, {
+        name: "reason",
+        type: "string",
+        description: "the reason for giving this role"
+    }],
+    description: "gives a role to an user in a guild",
     execute: async d => {
         const [
             guildID,

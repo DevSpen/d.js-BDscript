@@ -4,6 +4,40 @@ const Discord = require("discord.js")
 module.exports = {
     name: "$awaitReactions",
     brackets: true,
+    description: "await a reaction or reactions under given emoji, once reached given amount of reactions, the code field will be execute and $data will contain `userID` value with the user who reacted.\nIf awaiting multiple reactions under same emoji, $data will contain `userID`, `userID2`, `userID3`, etc...\nError code will be executed if the time ended and not enough reactions were collected.",
+    fields: [{
+        name: "channelID",
+        type: "string",
+        description: "the channel where the message was sent in"
+    }, {
+        name: "messageID",
+        type: "string",
+        description: "the message to await reactions on"
+    }, {
+        name: "filter",
+        type: "string",
+        description: "the user filter, or users that will be passed separated by commas.\nAlternatively `everyone` can be used to await reactions for everyone"
+    }, {
+        name: "time",
+        type: "number",
+        description: "the time to wait before ending the collector"
+    }, {
+        name: "emoji",
+        type: "string",
+        description: "the emoji to await reactions for"
+    }, {
+        name: "max",
+        type: "number",
+        description: "the amount of reactions to await (by different users)"
+    }, {
+        name: "code",
+        type: "string",
+        description: "the code to execute once all reactions are collected"
+    }, {
+        name: "error",
+        type: "string",
+        description: "the code to execute incase not enough reactions were collected"
+    }], 
     execute: async d => {
         let [
             channelID,

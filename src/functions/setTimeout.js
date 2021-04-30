@@ -2,6 +2,16 @@ const ms = require("ms")
 
 module.exports = {
     name: "$setTimeout",
+    description: "delays given code for given time",
+    fields: [{
+        name: "time",
+        type: "string",
+        description: "the time to wait before executing the code inside"
+    }, {
+        name: "code",
+        type: "string",
+        description: "the code to execute after given time"
+    }],
     brackets: true,
     execute: async d => {
         const [

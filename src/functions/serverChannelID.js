@@ -1,7 +1,18 @@
 module.exports = {
     name: "$serverChannelID",
     brackets: true,
+    description: "returns the channel ID of this guild using its name",
     optional: true,
+    returns: "?string",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to search for this channel"
+    }, {
+        name: "channel name",
+        type: "string",
+        description: "the channel name"
+    }],
     execute: async d => {
         if (d.value.inside) {
             const [guildID, channelName] = (await d.resolveArray()) || []

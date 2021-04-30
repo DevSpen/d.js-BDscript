@@ -1,6 +1,33 @@
 module.exports = {
     name: "$createEmoji",
     brackets: true,
+    description: "creates a emoji in a guild",
+    returns: "?string",
+    fields: [{
+        name: "guildID",
+        type: "string",
+        description: "the guild to create the emoji on"
+    }, {
+        name: "name",
+        type: "string",
+        description: "the name for the emoji"
+    }, {
+        name: "url",
+        type: "string",
+        description: "the url for the emoji"
+    }, {
+        name: "reason",
+        type: "string",
+        description: "the reason for creating this emoji"
+    }, {
+        name: "returnEmote",
+        type: "boolean",
+        description: "whether to return the newly created emoji"
+    }, {
+        name: "roles",
+        type: "string",
+        description: "role or roles to whitelist separated by `;`"
+    }],
     execute: async d => {
         const [
             guildID,

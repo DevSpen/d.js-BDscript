@@ -1,6 +1,13 @@
 module.exports = {
     name: "$data",
     brackets: true,
+    description: "pulls data from given assigned values from a function",
+    fields: [{
+        name: "property",
+        description: "the property name holding the value",
+        type: "string"
+    }],
+    returns: "?any",
     execute: async d => {
         const prop = await d.resolveAll()
         

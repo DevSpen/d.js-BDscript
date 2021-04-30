@@ -2,6 +2,13 @@ module.exports = {
     name: "$channelType",
     brackets: true,
     optional: true,
+    description: "the message channel type",
+    returns: "string",
+    fields: [{
+        name: "channelID",
+        type: "string",
+        description: "the ID for this channel"
+    }],
     execute: async d => {
         if (d.value.inside) {
             const channelID = await d.resolveAll()

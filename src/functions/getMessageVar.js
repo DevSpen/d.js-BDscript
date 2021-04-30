@@ -1,6 +1,17 @@
 module.exports = {
     name: "$getMessageVar",
     brackets: true,
+    description: "gets a message variable value",
+    fields: [{
+        name: "variable",
+        type: "string",
+        value: "the variable name"
+    }, {
+        name: "messageID",
+        type: "string",
+        value: "the message to get the variable value from"
+    }],
+    returns: "?number|?string",
     execute: async d => {
         const [
             variable,
