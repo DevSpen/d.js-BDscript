@@ -25,7 +25,7 @@ module.exports = {
     }, {
         name: "nsfw",
         type: "boolean",
-        description: "whether this channeñ should be nsfw"
+        description: "whether this channel should be nsfw"
     }, {
         name: "topic",
         type: "string",
