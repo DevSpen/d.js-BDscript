@@ -2,6 +2,7 @@ module.exports = {
     name: "$mentioned",
     brackets: true,
     description: "returns mentioned user ID",
+    optional: true,
     returns: "?string",
     fields: [{
         name: "mention number",
@@ -13,6 +14,10 @@ module.exports = {
         description: "whether to return the author ID if no mention was found"
     }],
     execute: async d => {
+        if (!d.value.inside) {
+            return d.deflate(d.message?.mentions?.users.map(r => r.id).join(", ") ?? "")
+        }
+        
         if (d.value.fields.length) {
             const [n, displayAuthorID = "no"] = (await d.resolveArray()) || []
             

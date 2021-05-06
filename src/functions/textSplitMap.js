@@ -6,7 +6,7 @@ module.exports = {
     fields: [{
         name: "separator",
         type: "string",
-        description: "the separator for each loop output"
+        description: "the separator for each loop output, use `skip` to get no output."
     }, {
         name: "code",
         type: "string",
@@ -31,9 +31,9 @@ module.exports = {
             
             if (c === undefined) return undefined
             
-            content.push(c)
+            if (c && separator !== "skip") content.push(c)
         }
         
-        return d.deflate(content.join(separator))
+        return d.deflate(separator === "skip" ? "" : content.join(separator))
     }
 }

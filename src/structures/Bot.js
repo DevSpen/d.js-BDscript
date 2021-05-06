@@ -1,6 +1,8 @@
 const Discord = require("discord.js")
 const Commands = require("../utils/commands")
+const CommandManager = require("./CommandManager")
 const Listeners = require("../utils/events")
+const BotOptions = require("../utils/botOptions")
 const SQL = require("sqlite_master.db")
 const DiscordUtil = require("../utils/discord")
 const ResolveAPIMessage = require("../main/resolveAPIMessage")
@@ -8,18 +10,26 @@ const interpreter = require("../main/interpreter")
 const Parser = require("../main/parser")
 const Compile = require("../main/compiler")
 const parse = require("parse-ms")
+const StatusManager = require("./StatusManager")
 
 require("../prototypes/Strings")
 require("../prototypes/Objects")
 require("../prototypes/Arrays")
 
 module.exports = class Bot {
-    constructor(options = {}) {
-        this.client = new Discord.Client({
-            partials: ["GUILD_MEMBER", "CHANNEL", "MESSAGE", "USER", "REACTION"]
-        })
+    constructor(options = BotOptions) {
+        if (!options.client) options.client = {}
+        
+        options.client.partials = ["USER", "MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER"]
+        
+        this.client = new Discord.Client(options.client)
         
         this.commands = new Discord.Collection() 
+        
+        Object.defineProperty(this, "manager", {
+            value: new CommandManager(this),
+            writable: false
+        })
         
         Object.defineProperty(this.client, "bot", {
             writable: false,
@@ -44,6 +54,11 @@ module.exports = class Bot {
         Object.defineProperty(this, "parser", {
             writable: false,
             value: Parser() 
+        })
+        
+        Object.defineProperty(this, "status", {
+            writable: false,
+            value: new StatusManager(this)
         })
         
         Object.defineProperty(this, "variables", {
@@ -89,6 +104,14 @@ module.exports = class Bot {
     }
     
     parse(ms) {
+        if (typeof ms !== "number") {
+            return undefined
+        }
+        
+        if (ms < 1000) {
+            return "1 second"
+        }
+        
         return Object.entries(parse(ms)).map((a, y) => {
             if (a[1] && y < 4) return `${a[1]} ${a[0]}`
             else return undefined
@@ -96,7 +119,7 @@ module.exports = class Bot {
     }
     
     _resolve(options) {
-        if (!options.prefix) throw new Error("Prefix was not given.")
+        if (!options.prefix || !options.prefix.length) throw new Error("Prefix was not given.")
         
         options.prefix = Array.isArray(options.prefix) ? options.prefix : [options.prefix]
         
@@ -106,9 +129,6 @@ module.exports = class Bot {
                 options.prefix[i] = Compile(this.client, p)
             } else options.prefix[i] = p 
         }
-        
-        if (options.intents) options.intents = DiscordUtil.Intents(options.intents).bits 
-        else options.intents = Discord.Intents.ALL 
         
         return options 
     }
@@ -174,6 +194,7 @@ module.exports = class Bot {
             console.log("Database ready!")
             this.client.once("ready", () => {
                 console.log("Client ready!")
+                this.status.start() 
             })
             this.client.login(this.options.token || token)
         })

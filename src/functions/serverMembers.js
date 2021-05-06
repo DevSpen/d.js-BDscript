@@ -1,5 +1,5 @@
 module.exports = {
-    name: "$memberIDs",
+    name: "$serverMembers",
     description: "returns the cached member IDs of a guild",
     fields: [{
         name: "guildID",

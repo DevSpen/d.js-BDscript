@@ -39,6 +39,8 @@ module.exports = {
         description: "the code to execute incase not enough reactions were collected"
     }], 
     execute: async d => {
+        d = d.clone() 
+        
         let [
             channelID,
             messageID,
@@ -48,7 +50,7 @@ module.exports = {
             max,
             code,
             error
-        ] = d.value.splits 
+        ] = [...d.value.splits] 
         
         channelID = await d.resolveCode(channelID)
         
@@ -60,7 +62,7 @@ module.exports = {
         
         messageID = await d.resolveCode(messageID)
         
-        if (messageID === undefined) return 
+        if (messageID === undefined) return
         
         const msg = await channel.messages.fetch(messageID).catch(err => null) 
         

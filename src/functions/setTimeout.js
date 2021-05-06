@@ -14,6 +14,8 @@ module.exports = {
     }],
     brackets: true,
     execute: async d => {
+        d = d.clone() 
+        
         const [
             timeout,
             ...code

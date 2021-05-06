@@ -3,6 +3,12 @@ const Discord = require("discord.js")
 module.exports = (client, code) => {
     const functions = Object.keys(client.bot.parser).sort((x, y) => y.length - x.length) 
     
+    const functionsWithAliases = Object.values(client.bot.parser).filter(d => d.aliases?.length && d.aliases.some(f => code.includes(f))).sort((x, y) => y.name.length - x.name.length) 
+    
+    for (const fn of functionsWithAliases) {
+        code = code.replace(new RegExp(`(${fn.aliases.map(f => "\\" + f).join("|")})`, "g"), fn.name)
+    }
+    
     const collection = new Discord.Collection() 
     
     let deniedIds = []

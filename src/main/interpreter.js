@@ -5,7 +5,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     
     if (!command) return undefined 
     
-    if (client.bot.options.users && !client.bot.options.users.includes(data.message?.author?.id)) {
+    if (client.bot.options.users && data.message?.author?.id && !client.bot.options.users.includes(data.message?.author?.id)) {
         return undefined
     }
     
@@ -21,9 +21,10 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     
     data.startedAt = Date.now() 
     
-    data.channel = data.channel || data.message?.channel
+    data.channel = data.channel ?? data.message?.channel
     
-    data.mainChannel = data.message?.channel 
+    data.mainChannel = data.mainChannel ?? data.message?.channel 
+    
     data.container = {
         randoms: {},
         keywords: {}, 
@@ -39,7 +40,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     for (const value of data.container.array) {
         data.value = value 
         const res = await value.func.execute(data) 
-        if (!res) return undefined
+        if (!res) return 
         else {
             data.container.code = data.container.code.replace(res.id, res.with)
             if (data.container.return) {
@@ -52,7 +53,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
             }
         }
     }
-    
+   
     if (returnCode) return data.container
     
     if (data.channel) {

@@ -4,7 +4,7 @@ module.exports = {
     name: "$findUser",
     brackets: true,
     description: "finds a user by using either their ID, username or mention.",
-    returns: "string",
+    returns: "?string",
     fields: [{
         name: "option",
         type: "string",

@@ -8,12 +8,22 @@ const FLAGS = () => {
     return obj 
 }
 
+const READONLY_FLAGS = () => {
+    const obj = {}
+    
+    for (const [key, val] of Object.entries(Discord.Permissions.FLAGS)) obj[key.toLowerCase().replace(/_/g, "")] = key 
+    
+    return obj 
+}
+
 module.exports.FLAGS = FLAGS
 
-module.exports.getPerms = (perms) => {
+module.exports.READONLY_FLAGS = READONLY_FLAGS
+
+module.exports.getPerms = (perms, returnFlags = false) => {
     if (!Array.isArray(perms)) perms = [perms]
     
-    const flags = FLAGS() 
+    const flags = returnFlags ? READONLY_FLAGS() : FLAGS() 
     
     return perms.map(p => flags[p]) 
 }

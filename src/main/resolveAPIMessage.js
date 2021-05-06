@@ -5,7 +5,7 @@ module.exports = async (channel, container, cnt, fn = "send") => {
     
     if (container.embed?.length || container.embed?.image || container.embed?.author || container.embed?.thumbnail) options.embed = container.embed 
     
-    if ((container.embed?.length || container.embed?.image || container.embed?.author || container.embed?.thumbnail) && !options.embed) options.embed = container 
+    if ((container.length || container?.image || container?.author || container?.thumbnail) && !options.embed) options.embed = container 
     
     if (container.embed?.files.length || container.files?.length) options.files = container.embed?.files || container.files 
     

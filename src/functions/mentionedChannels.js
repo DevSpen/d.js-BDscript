@@ -11,8 +11,13 @@ module.exports = {
         type: "boolean",
         description: "whether to return current channel ID if no mention was found"
     }],
+    optional: true,
     brackets: true,
     execute: async d => {
+        if (!d.value.inside) {
+            return d.deflate(d.message?.mentions?.channels.map(r => r.id).join(", ") ?? "")
+        }
+        
         if (d.value.fields.length) {
             const [n, displayChannelID = "no"] = (await d.resolveArray()) || []
             

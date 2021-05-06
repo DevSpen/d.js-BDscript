@@ -27,6 +27,8 @@ module.exports = {
             days
         ] = (await d.resolveArray()) || []
         
+        if (guildID === undefined) return undefined
+        
         const guild = d.client.guilds.cache.get(guildID)
         
         if (!guild) return d.sendError("guildID", guildID)

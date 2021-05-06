@@ -2,6 +2,7 @@ module.exports = {
     name: "$mentionedRoles",
     description: "returns mentioned role ID",
     returns: "?string",
+    optional: true,
     fields: [{
         name: "mention number",
         type: "number",
@@ -9,6 +10,10 @@ module.exports = {
     }],
     brackets: true,
     execute: async d => {
+        if (!d.value.inside) {
+            return d.deflate(d.message?.mentions?.roles.map(r => r.id).join(", ") ?? "")
+        }
+        
         if (d.value.fields.length) {
             const [n] = (await d.resolveArray()) || []
             

@@ -48,6 +48,6 @@ module.exports = {
         
         if (typeof evaled === "object") evaled = require("util").inspect(evaled, { depth: 0 })
         
-        return d.deflate(d.value.id, output ? evaled : "")
+        return d.deflate(d.value.id, output ? evaled ?? "" : "")
     }
 }

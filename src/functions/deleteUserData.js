@@ -7,6 +7,10 @@ module.exports = {
         name: "userID",
         description: "the user to delete the data from",
         type: "string"
+    }, {
+        name: "guildID",
+        description: "the guild to delete the user data from",
+        type: "string"
     }],
     execute: async d => {
         const [
