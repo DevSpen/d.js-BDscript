@@ -16,7 +16,7 @@ module.exports = {
     }, {
         name: "returnChannelID",
         type: "boolean",
-        description: `whether to return the current channel ID if no user was found`
+        description: `whether to return the current channel ID if no channel was found`
     }],
     execute: async d => {
         const [

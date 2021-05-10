@@ -31,6 +31,21 @@ module.exports = class Bot {
             writable: false
         })
         
+        Object.defineProperty(this, "ytdl_servers", {
+            writable: false,
+            value: new Discord.Collection()
+        })
+        
+        Object.defineProperty(this, "ytdl_cache", {
+            writable: false,
+            value: new Discord.Collection()
+        })
+        
+        Object.defineProperty(this, "lavalink_servers", {
+            writable: false,
+            value: new Discord.Collection()
+        })
+        
         Object.defineProperty(this.client, "bot", {
             writable: false,
             value: this 

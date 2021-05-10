@@ -4,6 +4,14 @@ module.exports = {
         code: true,
         aliases: false 
     },
+    musicEndCommand: {
+        channel: true,
+        code: true
+    },
+    musicStartCommand: {
+        channel: true,
+        code: true
+    },
     deleteCommand: {
         channel: true,
         code: true,

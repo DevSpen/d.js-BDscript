@@ -21,7 +21,7 @@ module.exports = {
             
             return d.deflate(d.value.id, channel.id) 
         } else {
-            return d.deflate(d.value.id, d.message.channel.id)
+            return d.deflate(d.value.id, d.message?.channel?.id)
         }
     }
 }

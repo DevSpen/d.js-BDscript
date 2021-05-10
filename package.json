@@ -1,6 +1,6 @@
 {
   "name": "d.js-bdscript",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "A completely new language inspired in BDFD (Bot Designer For Discord), this package allows you to interact with the Discord API and uses the discord.js framework as a wrapper to it.",
   "main": "./src/index.js",
   "scripts": {
@@ -36,6 +36,8 @@
     "ffmpeg-static": "^4.3.0",
     "fluent-ffmpeg": "^2.1.2",
     "opusscript": "^0.0.8",
-    "ytdl-core": "^4.7.0"
+    "yt-search": "^2.8.0",
+    "ytdl-core": "^4.7.0",
+    "ytfps": "^1.0.5"
   }
 }
