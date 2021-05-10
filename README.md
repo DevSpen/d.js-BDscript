@@ -64,4 +64,32 @@ bot.variable([
 ])
 ```
 
+# Music #
+---------------------------------
+Yes, you heard it right! We have added music functions for you to make a good use of voice channels.
+We only support ytdl-core currently but will soon have lavalink support!
+To start off you need to install these dependencies as music dependencies are not pre-installed to keep the package clean.
+
+```
+npm i ytdl-core ffmpeg yt-search ytfps opusscript
+```
+
+You can optionally install `@discordjs/opus` and `ffmpeg-static` for better experience.
+
+Here is a small example of how you would play a song through youtube search (query):
+```js
+Bot.command({
+    type: "command",
+    name: "play",
+    code: `
+    $onlyIf[$voiceID!=;Please join a voice channel first!]
+    $joinVoice[$voiceID]
+    $playSong[$guildID;$message;search]
+    $if[$queueLength==1;
+        Playing now $songInfo[title]!
+    ;
+        Successfully queued $songInfo[title;$queueLength]!
+    ]`
+})
+```
 
