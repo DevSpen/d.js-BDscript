@@ -5,7 +5,7 @@ Want to use beta version of the package? Use `npm i https://github.com/Rubenennj
 
 Inspired in [Bot Designer For Discord](https://discord.gg/bot)
 
-Need help? Or hang out with other users who use this package? Then don't hesitate to join [here](https://discord.gg/7eBGgpamVh)!
+Need help? Or hang out with other users who use this package? Then don't hesitate to join [here](https://discord.gg/ezcdhQ8n)!
 
 # Base for a d.js-BDscript bot #
 ---------------------------------
