@@ -1,0 +1,17 @@
+module.exports = {
+    content: ".content",
+    userID: ".author?.id",
+    messageID: ".id",
+    channelID: ".channel?.id",
+    title: (n) => `.embeds[${n}]?.title`,
+    description: (n) => `.embeds[${n}]?.description`,
+    fieldName: (n, fld) => `.embeds[${n}]?.fields?.[${fld}]?.name`,
+    fieldValue: (n, fld) => `.embeds[${n}]?.fields?.[${fld}]?.value`,
+    author: (n) => `.embeds[${n}]?.author?.name`,
+    authorURL: (n) => `.embeds[${n}]?.author?.iconURL`,
+    footer: (n) => `.embeds[${n}]?.footer?.text`,
+    footerURL: (n) => `.embeds[${n}]?.footer?.url`,
+    thumbnail: (n) => `.embeds[${n}]?.thumbnail`,
+    image: (n) => `.embeds[${n}]?.image?.url`,
+    attachment: (n) => `.attachments.array()[${n}]?.url`,
+}
