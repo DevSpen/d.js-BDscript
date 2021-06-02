@@ -27,7 +27,13 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         }
     }
 
-    const message = await channel[container.replyWaiting ? "editReply" : fn](content || null, options).catch(err => null) 
+    if (fn === "send") {
+        if (container.replyWaiting) {
+            fn = "editReply"
+        }
+    }
+
+    const message = await channel[fn](content || null, options).catch(err => null) 
     
     return message 
 }
