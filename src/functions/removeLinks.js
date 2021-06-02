@@ -14,5 +14,5 @@ module.exports = {
         if (code === undefined) return undefined
 
         return d.deflate(code.replace(/(?:https?|ftp)://[\n\S]+/g, ''))
+    }
 }
-  }
