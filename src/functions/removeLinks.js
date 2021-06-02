@@ -10,9 +10,9 @@ module.exports = {
     returns: "string", 
     execute: async d => {
         const code = await d.resolveAll()
-
+    
         if (code === undefined) return undefined
-
-        return d.deflate(code.replace(/(?:https?|ftp)://[\n\S]+/g, ''))
+    
+        return d.deflate(code.replace(/(?:https?|ftp):\/\/[\n\S]+/g, ''))
     }
 }
