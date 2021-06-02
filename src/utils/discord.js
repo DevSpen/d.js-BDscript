@@ -43,3 +43,11 @@ module.exports.Permissions = (bits) => {
         readable: current.goof() 
     }
 }
+
+module.exports.INTENTS_FLAGS = () => {
+    const obj = {};
+    Object.keys(Discord.Intents.FLAGS).map(d => {
+        obj[d.toLowerCase().replace(/_/g, "")] = d 
+    })
+    return obj
+}

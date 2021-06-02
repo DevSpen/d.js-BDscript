@@ -1,4 +1,5 @@
 module.exports = {
+    onInteraction: ["interaction", (client) => client.on("interaction", (i) => require("../events/interaction")(client, i))], 
     onMusicStart: ["guildMusicStart", (client) => client.on("guildMusicStart", (guild, song) => require("../events/guildMusicStart")(client, guild, song))],
     onMusicEnd: ["guildMusicEnd", (client) => client.on("guildMusicEnd", (guild, song) => require("../events/guildMusicEnd")(client, guild, song))],
     onJoined: ["guildMemberAdd", (client) => client.on("guildMemberAdd", m => require("../events/guildMemberAdd")(client, m))], 

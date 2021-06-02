@@ -11,7 +11,7 @@ module.exports = {
         const data = await d.resolveAll()
         
         if (data === undefined) return undefined
-        
+
         d.container.embed.setDescription(data) 
         
         return d.deflate(d.value.id, "")

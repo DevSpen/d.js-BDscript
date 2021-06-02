@@ -4,6 +4,10 @@ module.exports = {
         code: true,
         aliases: false 
     },
+    slashCommand: {
+        name: true,
+        code: true 
+    }, 
     musicEndCommand: {
         channel: true,
         code: true

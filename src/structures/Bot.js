@@ -20,13 +20,17 @@ require("../prototypes/Arrays")
 module.exports = class Bot {
     constructor(options = BotOptions) {
         if (!options.client) options.client = {}
-        
+
         options.client.partials = ["USER", "MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER"]
+                
+        options = this._resolve(options) 
         
         this.client = new Discord.Client(options.client)
         
         this.commands = new Discord.Collection() 
         
+        this.slash_commands_data = new Discord.Collection()
+
         Object.defineProperty(this, "manager", {
             value: new CommandManager(this),
             writable: false
@@ -71,7 +75,7 @@ module.exports = class Bot {
             writable: false,
             value: Parser() 
         })
-        
+
         Object.defineProperty(this, "status", {
             writable: false,
             value: new StatusManager(this)
@@ -80,9 +84,7 @@ module.exports = class Bot {
         Object.defineProperty(this, "variables", {
             value: [] 
         })
-        
-        options = this._resolve(options) 
-        
+
         this.options = options 
         
         Object.defineProperty(this, "db", {
@@ -119,6 +121,10 @@ module.exports = class Bot {
         return new RegExp(`^<@!?${this.client.user?.id}>`)
     }
     
+    createSlashCommandData(opts = new Discord.ApplicationCommand()) {
+        return this.slash_commands_data.set(opts.name, opts)
+    }
+
     parse(ms) {
         if (typeof ms !== "number") {
             return undefined
@@ -146,6 +152,26 @@ module.exports = class Bot {
             } else options.prefix[i] = p 
         }
         
+        if (!options.intents) {
+            throw new Error("Intents must be passed to bot options, check /intents for more info (discord)")
+        } else {
+            if (typeof options.intents === "string") {
+                if (options.intents === "all") {
+                    options.client.intents = Discord.Intents.ALL
+                } else if (options.intents === "non_privileged") {
+                    options.client.intents = Discord.Intents.NON_PRIVILEGED
+                } else {
+                    throw new Error(`Valid Intents must be passed to bot options, check /intents for more info (discord)`)
+                }
+            } else {
+                const ints = DiscordUtil.INTENTS_FLAGS()
+                options.client.intents = options.intents.map(i => ints[i])
+                if (options.client.intents.includes(undefined)) {
+                    throw new Error(`Invalid intents passed to bot.`)
+                }
+            }   
+        }
+
         return options 
     }
     

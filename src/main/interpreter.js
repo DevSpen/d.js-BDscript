@@ -16,6 +16,8 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     if (client.bot.options.guildOnly === true && data.message?.channel?.type === "dm") {
         return undefined
     }
+
+    Object.entries(require("../prototypes/Objects")).map(full => data[full[0]] = full[1].bind(null, data))
     
     data.client = client 
     
@@ -40,6 +42,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     
     for (const value of data.container.array) {
         data.value = value 
+        data.backup = value
         const res = await value.func.execute(data) 
         if (!res) return 
         else {
@@ -58,6 +61,11 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     if (returnCode) return data.container
     
     if (data.channel) {
-        const m = await client.bot.resolveAPIMessage(data.channel, data.container) 
+        const m = await client.bot.resolveAPIMessage(
+            data.container.reply ? data.message : data.channel, 
+            data.container, 
+            undefined, 
+            data.container.reply ? "reply" : "send"
+        ) 
     }
 }
