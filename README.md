@@ -15,6 +15,7 @@ const bdjs = require("d.js-bdscript")
 
 const bot = new bdjs({
     token: "token here", //bot token
+    intents: "all", //intents (array) to enable for the bot, check /intents for all intents. (discord)
     prefix: "!" //accepts an array of prefixes too 
 })
 
