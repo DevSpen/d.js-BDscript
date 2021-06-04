@@ -11,7 +11,7 @@ module.exports = {
     returns: "?number",
     execute: async d => {
         if (!d.value.inside) {
-            const bans = await d.message?.guild?.fetchBans().catch(err => null)
+            const bans = await d.message?.guild?.bans.fetch().catch(err => null)
             if (!bans) return d.sendError(`:x: Failed to fetch bans`)
             return d.deflate(bans.size)
         }

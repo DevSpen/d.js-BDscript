@@ -19,7 +19,7 @@ module.exports = {
         if (!int) return d.sendError("interval ID", id)
 
         clearInterval(int)
-        
+
         d.client.bot.intervals.delete(id)
 
         return d.deflate()

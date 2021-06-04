@@ -37,9 +37,12 @@ module.exports = {
 
         const id = Math.floor(Math.random() * 99999999999)
         
-        d.client.bot.intervals.set(id.toString(), setInterval(() => {
+        d.client.bot.intervals.set(id.toString(), setInterval(function () {
             d.resolveCode(code)
+            this.startedAt = Date.now()
         }, ms(timeout)))
+        
+        d.client.bot.intervals.get(id.toString()).startedAt = Date.now()
         
         return d.deflate(returnID === "yes" ? id.toString() : "") 
     }
