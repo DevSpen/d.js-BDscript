@@ -27,6 +27,8 @@ module.exports = class Bot {
         
         this.client = new Discord.Client(options.client)
         
+        this.intervals = new Discord.Collection()
+        
         this.commands = new Discord.Collection() 
         
         this.slash_commands_data = new Discord.Collection()
