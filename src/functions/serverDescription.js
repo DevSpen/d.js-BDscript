@@ -10,7 +10,7 @@ module.exports = {
             type: "string"
         }
     ],
-    returns: "string",
+    returns: "?string",
     execute: async d => {
         if (d.value.inside) {
             const guildID = await d.resolveAll()
@@ -23,7 +23,7 @@ module.exports = {
 
             return d.deflate(guild.description)
         } else {
-            return d.deflate(d.message?.guild?.description ?? 0)
+            return d.deflate(d.message?.guild?.description ?? "")
         }
     }
 }

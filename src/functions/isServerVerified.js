@@ -23,7 +23,7 @@ module.exports = {
 
             return d.deflate(guild.verified)
         } else {
-            return d.deflate(d.message?.guild?.verified ?? 0)
+            return d.deflate(d.message?.guild?.verified ?? "")
         }
     }
 }

@@ -13,6 +13,6 @@ module.exports = {
 
         if (code === undefined) return undefined
 
-        return d.deflate(code.decodeURI())
+        return d.deflate(decodeURI(code))
     }
 }
