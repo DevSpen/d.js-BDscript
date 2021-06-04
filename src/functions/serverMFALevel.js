@@ -1,5 +1,5 @@
 module.exports = {
-    name: "$mfaLevel",
+    name: "$serverMFALevel",
     description: "Returns a server’s MFA level.",
     brackets: true,
     optional: true,
