@@ -36,6 +36,11 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         fn = "editReply"
     }
     
+    if (container.updateInteraction) {
+        fn = "update"
+        delete container.updateInteraction
+    }
+
     const message = await channel[fn](content || null, options).catch(() => null)
     
     return message 

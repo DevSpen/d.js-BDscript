@@ -1,7 +1,7 @@
 module.exports = {
     name: "$isMuted",
     description: "Returns whether or not a user is muted. Applies to both self and server mutes.",
-    returns: "boolean",
+    returns: "?boolean",
     brackets: true,
     optional: true,
     fields: [{

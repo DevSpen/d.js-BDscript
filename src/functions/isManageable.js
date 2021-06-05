@@ -1,7 +1,7 @@
 module.exports = {
     name: "$isManageable",
     description: "Whether the bot is above a user in the hierarchy, according to role position and server ownership. In short, returns if the bot can manage the user.",
-    returns: "boolean",
+    returns: "?boolean",
     brackets: true,
     optional: true,
     fields: [{

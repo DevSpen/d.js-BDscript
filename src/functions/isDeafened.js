@@ -1,7 +1,7 @@
 module.exports = {
     name: "$isDeafened",
     description: "Returns whether or not a user is deafened. Applies to both self and server deafen.",
-    returns: "boolean",
+    returns: "?boolean",
     brackets: true,
     optional: true,
     fields: [{

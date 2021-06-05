@@ -1,7 +1,7 @@
 module.exports = {
     name: "$isSelfMuted",
     description: "Returns whether or not a user is self-muted.",
-    returns: "boolean",
+    returns: "?boolean",
     brackets: true,
     optional: true,
     fields: [{
