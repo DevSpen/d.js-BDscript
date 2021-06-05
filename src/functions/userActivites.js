@@ -54,6 +54,8 @@ module.exports = {
             else if (text) content.push(text)
         }
         
+        delete d.container.pointTo
+        
         return d.deflate(content.join(separator))
     }
 }

@@ -1,3 +1,5 @@
+const activityProperties = require("../utils/activity-properties")
+
 module.exports = {
     name: "$data",
     brackets: true,
@@ -13,10 +15,15 @@ module.exports = {
     }],
     returns: "?any",
     execute: async d => {
-        const [prop, hideError = "no"] = (await d.resolveArray()) || []
+        let [prop, hideError = "no"] = (await d.resolveArray()) || []
         
         if (prop === undefined) return 
         
+        if (d.container.pointTo === "activities") {
+            if (!Object.keys(activityProperties).includes(prop)) return d.sendError("Activity property", prop)
+            else prop = activityProperties[prop].code
+        }
+
         const val = eval(`d.container.${d.container.pointTo || "data"}?.${prop}`) 
         
         if (val === undefined && hideError === "no") return d.sendError(`:x: No data '${prop}' found!`)

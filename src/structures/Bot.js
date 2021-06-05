@@ -38,6 +38,8 @@ module.exports = class Bot {
             writable: false
         })
         
+        Object.defineProperty(this, "listeners", { value: [] })
+
         Object.defineProperty(this, "ytdl_servers", {
             writable: false,
             value: new Discord.Collection()
@@ -251,6 +253,12 @@ module.exports = class Bot {
                 
             if (!event) throw new Error(`Event ${eventOrEvents} does not exist!`)
                 
+            if (this.listeners.includes(eventOrEvents)) {
+                console.warn(`Event ${eventOrEvents} was already added.`)
+            }
+
+            this.listeners.push(eventOrEvents)
+            
             event[1](this.client) 
         } else {
             for (const name of eventOrEvents) {
@@ -258,6 +266,13 @@ module.exports = class Bot {
                 
                 if (!event) throw new Error(`Event ${name} does not exist!`)
                 
+                if (this.listeners.includes(name)) {
+                    console.warn(`Event ${name} was already added.`)
+                    continue; 
+                }
+
+                this.listeners.push(name)
+
                 event[1](this.client) 
             }
         }

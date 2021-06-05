@@ -1,12 +1,41 @@
 module.exports = {
-    "name": "activity name",
-    "state": "activity state",
-    type: "activity type",
-    details: "activity details",
-    "emoji.name": "the emoji of the custom status",
-    "emoji.url": "emoji url",
-    "emoji.toString()": "the full emoji",
-    "emoji.id" : "the id of the emoji",
-    "sessionID" : "the session ID",
-    createdTimestamp: "the time in milliseconds at which this activity was created"
+    name: {
+        description: "the activity name",
+        code: "name"
+    },
+    state: {
+        description: "the activity state",
+        code: "state"
+    },
+    type: {
+        description: "the activity type",
+        code: "type"
+    },
+    details: {
+        description: "the activity details",
+        code: "details"
+    },
+    emojiName: {
+        description: "the emoji name",
+        code: "emoji.name"
+    },
+    emojiID: {
+        description: "the emoji ID",
+        code: "emoji.id"
+    },
+    emoji: {
+        description: "the full emoji",
+        code: "emoji.toString()"
+    },
+    emojiURL: {
+        description: "the emoji url",
+        code: "emoji.url"
+    },
+    sessionID: {
+        description: "the session ID of the activity",
+        code: "sessionID"
+    },
+    createdTimestamp: {
+        description: "the time at which this activity was created in ms"
+    }
 }

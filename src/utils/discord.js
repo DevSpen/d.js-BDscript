@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const { ID } = require("./regexes")
 
 const FLAGS = () => {
     const obj = {}
@@ -6,6 +7,10 @@ const FLAGS = () => {
     for (const [key, val] of Object.entries(Discord.Permissions.FLAGS)) obj[key.toLowerCase().replace(/_/g, "")] = val 
     
     return obj 
+}
+
+module.exports.validate = (id) => {
+    return ID.test(id)
 }
 
 const READONLY_FLAGS = () => {

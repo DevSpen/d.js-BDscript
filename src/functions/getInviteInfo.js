@@ -42,6 +42,6 @@ module.exports = {
         
         if (!Object.keys(inviteProperties).includes(prop)) return d.sendError("property", prop)
 
-        return d.deflate(eval(`inv${inviteProperties[prop]}`) ?? "")
+        return d.deflate(eval(`inv${inviteProperties[prop].code}`) ?? "")
     }
 }

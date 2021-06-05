@@ -94,3 +94,83 @@ Bot.command({
 })
 ```
 
+# Slash Commands #
+---------------------------------
+We also support slash commands as of 5.0.0 
+To make slash commands, you first need to define its info through `Bot.createSlashCommandData()`.
+```js
+Bot.createSlashCommandData({
+    name: "test",
+    description: "a simple slash command",
+    options: [
+        {
+            name: "message",
+            description: "something you can say",
+            type: "STRING",
+            required: true
+        }, 
+        {
+            name: "target",
+            description: "the person to mention",
+            type: "USER",
+            required: false 
+        }
+    ]
+})
+```
+This will not do anything but define the data for the slash command `test`, we now have to add it to a guild or globally to every guild:
+```js
+//for global
+Bot.command({
+    type: "readyCommand", 
+    code: `$createSlashCommand[global;test]` // last field is the name of our slash command
+})
+
+//for guild specific
+Bot.command({
+    type: "readyCommand",
+    code: `$createSlashCommand[844681827015720991;test]` // first field is the ID of the guild to add this slash command to
+})
+```
+And that's, you've now created a slash command, but how to reply to it? Easy!
+```js
+Bot.addEvent("onInteraction") //enables both slash commands and button interactions
+
+Bot.command({
+    type: "slashCommand",
+    name: "test", // the name of our slash command
+    code: `
+    $reply 
+    $title[$username said:]
+    $description[$slashOption[message]]
+    `
+})
+```
+Notice how we put $reply, this is so the command replies to the interaction instead of of just making a response, which would make this interaction fail even though the bot would've responded.
+
+# Buttons #
+---------------------------------
+We support buttons as of 5.0.0
+To add buttons to a message, you only need to use $addActionRow / $addButton:
+```js
+Bot.command({
+    type: "command",
+    name: "buttons",
+    code: `
+    $addActionRow
+    $addButton[button1;Click Me!;primary]
+    $addButton[button2;Or Me!;secondary]
+    Buttons! :3
+    ` 
+})
+```
+Yeah, that is about it, but now how do we interact with them? Very easy:
+```js
+Bot.addEvent("onInteraction") // enables both slash command and button interactions
+
+Bot.command({
+    type: "buttonCommand",
+    code: `$reply <@$authorID> clicked button with ID $customID!`
+})
+```
+And that is everything you need to know about buttons!
