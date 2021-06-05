@@ -4,6 +4,10 @@ module.exports = {
         code: true,
         aliases: false 
     },
+    buttonCommand: {
+        name: false,
+        code: true 
+    },
     slashCommand: {
         name: true,
         code: true 

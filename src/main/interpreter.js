@@ -32,6 +32,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
         keywords: {}, 
         randomTexts: {}, 
         splits: [], 
+        components: [], 
         randomStrings: {}, 
         invites: {},
         requests: {}, 

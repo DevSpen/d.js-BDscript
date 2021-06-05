@@ -4,11 +4,12 @@ module.exports = async (channel, container, cnt, fn = "send") => {
     const options = {
         allowedMentions: {
             repliedUser: container.replyMention 
-        }
+        },
+        components: container.components ?? []
     } 
     
     const content = cnt || container.code
-    
+
     if (container.ephemeral) {
         options.ephemeral = true
     }
@@ -28,12 +29,14 @@ module.exports = async (channel, container, cnt, fn = "send") => {
     }
 
     if (fn === "send") {
-        if (container.replyWaiting) {
-            fn = "editReply"
-        }
+
     }
 
-    const message = await channel[fn](content || null, options).catch(err => null) 
+    if (container.replyWaiting) {
+        fn = "editReply"
+    }
+    
+    const message = await channel[fn](content || null, options).catch(() => null)
     
     return message 
 }

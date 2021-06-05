@@ -13,6 +13,6 @@ module.exports = {
 
         if (code === undefined) return undefined
 
-        return d.deflate(isNaN(code))
+        return d.deflate(isNaN(code)) 
     }
 }
