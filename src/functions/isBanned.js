@@ -24,7 +24,7 @@ module.exports = {
         
         if (!guild) return d.sendError("guildID", guildID)
         
-        const ban = await guild.fetchBan(userID).catch(err => null)
+        const ban = await guild.bans.fetch(userID || "1").catch(err => null)
         
         return d.deflate(Boolean(ban))
     }

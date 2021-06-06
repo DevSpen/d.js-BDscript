@@ -13,6 +13,6 @@ module.exports = {
         
         if (numbers === undefined) return 
         
-        return d.deflate(numbers.reduce((x, y) => Number(x) % Number(y), 0))
+        return d.deflate(numbers.reduce((x, y) => Number(x) % Number(y)))
     }
 }
