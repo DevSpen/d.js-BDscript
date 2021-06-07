@@ -9,3 +9,5 @@ module.exports.ROLE = /<@&(\d{17,19})>/
 module.exports.ID = /^(\d{17,19})$/
 
 module.exports.WEBHOOK_URL = /https?:\/\/discord\.com\/api\/webhooks\/(\d{17,19})\/(\w+)/
+
+module.exports.MATH = /[^0-9\.\+\-\*\/\(\)\[\]%]/g

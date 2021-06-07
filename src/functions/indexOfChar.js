@@ -1,6 +1,6 @@
 module.exports = {
     name: "$indexOfChar",
-    description: "returns the index of given character in a string, or -1 if it does not contain that character",
+    description: "returns the index of given character in a string, or 0 f it does not contain that character",
     returns: "number",
     fields: [{
         name: "message",
@@ -17,6 +17,6 @@ module.exports = {
         
         if (text === undefined) return undefined
         
-        return d.deflate(text.indexOf(word))
+        return d.deflate(text.indexOf(word) + 1)
     }
 }
