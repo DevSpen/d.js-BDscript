@@ -1,6 +1,6 @@
 module.exports = {
     name: "$serverAFKTimeout",
-    description: "Returns a server’s AFK timeout.",
+    description: "Returns a server’s AFK timeout in seconds.",
     brackets: true,
     optional: true,
     fields: [
