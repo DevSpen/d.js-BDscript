@@ -7,10 +7,10 @@ module.exports = {
         {
             name: "guildID",
             description: "The server to return the data for.",
-            type: "?string"
+            type: "string"
         }
     ],
-    returns: "string",
+    returns: "?string",
     execute: async d => {
         if (d.value.inside) {
             const guildID = await d.resolveAll()
