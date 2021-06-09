@@ -18,11 +18,11 @@ module.exports = {
         type: "string"
     }, {
         name: "index",
-        description: "when getting attachments of field name/value, you need to specify the index for the attachment or field.",
+        description: "when getting attachments or field name/value, you need to specify the index for the attachment or field.",
         type: "number"
     }, {
         name: "embedIndex",
-        description: "when gettind an embed property, you may specify the index of the embed.",
+        description: "when getting an embed property, you may specify the index of the embed.",
         type: "number"
     }],
     returns: "?any",

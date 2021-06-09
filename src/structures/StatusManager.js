@@ -24,11 +24,11 @@ module.exports = class StatusManager {
         this.bot.client.user.setPresence({
             status: status.presence ?? status.status,
             idle: status.idle,
-            activity: {
+            activities: [{
                 name: resolved?.code,
                 type: status.type?.toUpperCase?.(),
                 url: status.url
-            }
+            }]
         })
         
         this.current++
