@@ -1,3 +1,5 @@
+const data = require("../main/data")
+
 module.exports = {
     name: "$botOwnerID",
     description: "returns the ID of the bot application owners",
@@ -9,9 +11,9 @@ module.exports = {
         description: "the separator for each ID",
         type: "string"
     }],
-    execute: async d => {
+    execute: async (d = data) => {
         if (!d.value.inside) {
-            const app = await d.client.fetchApplication()
+            const app = await d.client.application.fetch()
             
             const owners = app.owner.tag ? [app.owner.id] : app.owner.map(m => m.id)
             
@@ -22,7 +24,7 @@ module.exports = {
         
         if (sep === undefined) return 
         
-        const app = await d.client.fetchApplication()
+        const app = await d.client.application.fetch()
             
         const owners = app.owner.tag ? [app.owner.id] : app.owner.map(m => m.id)
             
