@@ -31,7 +31,7 @@ module.exports = {
         
         if (!channel) return d.sendError("channelID", channelID)
         
-        const m = await d.client.bot.resolveAPIMessage(channel, d.container.embed, data)
+        const m = await d.client.bot.resolveAPIMessage(channel, d.container, data)
         
         return d.deflate(returnMessageID === "yes" ? m?.id || "" : "")
     }

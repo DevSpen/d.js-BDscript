@@ -1,4 +1,4 @@
-const { Webhook, CommandInteraction } = require("discord.js")
+const { Webhook, CommandInteraction, MessageEmbed } = require("discord.js")
 
 module.exports = async (channel, container, cnt, fn = "send") => {
     const options = {
@@ -43,5 +43,13 @@ module.exports = async (channel, container, cnt, fn = "send") => {
 
     const message = await channel[fn](content || null, options).catch(() => null)
     
+    if (channel.client?.bot.options.experimental) {
+        container.embed = new MessageEmbed()
+        container.components = []
+        delete container.repliedUser
+        delete container.replyMention
+        delete container.replyWaiting
+    }
+
     return message 
 }

@@ -29,8 +29,8 @@ module.exports = {
         
         if (!user) return d.sendError("userID", userID)
         
-        const m = await d.client.bot.resolveAPIMessage(user, d.container.embed, message)
-        
+        const m = await d.client.bot.resolveAPIMessage(user, d.container, message)
+
         return d.deflate(returnID === "yes" ? m?.id || "" : "")
     }
 }

@@ -6,5 +6,6 @@ module.exports = {
     mentionAsPrefix: false, 
     users: undefined, 
     prefix: [],
+    experimental: false,
     intents: []
 }
