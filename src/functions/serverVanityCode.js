@@ -1,6 +1,6 @@
 module.exports = {
     name: "$serverVanityCode",
-    description: "Returns a server's vanity URL code.",
+    description: "Returns a server's vanity URL code (if any at all).",
     brackets: true,
     optional: true,
     fields: [
