@@ -1,5 +1,5 @@
 module.exports = {
-    name: "$serverRulesChannel",
+    name: "$serverRulesChannelID",
     description: "Returns a server’s rules channel ID (which is set in community settings).",
     brackets: true,
     optional: true,
