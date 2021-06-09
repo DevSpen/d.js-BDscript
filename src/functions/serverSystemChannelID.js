@@ -1,5 +1,5 @@
 module.exports = {
-     name: "$serverSystemChannel",
+     name: "$serverSystemChannelID",
      description: "Returns a server’s system messages channel ID (which is set in community-settings).",
      brackets: true,
      optional: true,
