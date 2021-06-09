@@ -20,10 +20,14 @@ module.exports = {
             const guild = d.client.guilds.cache.get(guildID)
             
             if (!guild) return d.sendError("guildID", guildID)
-
-            return d.deflate(guild.vanityURLCode)
+            
+            const vanity = await guild.fetchVanityData().catch(() => null)
+           
+            return d.deflate(vanity?.code ?? "")
         } else {
-            return d.deflate(d.message?.guild?.vanityURLCode ?? "")
+            const vanity = await d.message?.guild?.fetchVanityData().catch(() => null)
+           
+            return d.deflate(vanity?.code ?? "")
         }
     }
 }
