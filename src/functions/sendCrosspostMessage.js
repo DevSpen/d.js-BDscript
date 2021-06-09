@@ -30,7 +30,7 @@ module.exports = {
         if (chs.includes(undefined)) return d.sendError("channel ID", channels.filter(c => !d.client.channels.cache.has(c)).join(", "))
 
         for (const c of chs) {
-            await d.client.bot.resolveAPIMessage(c, d.container.embed, m)
+            await d.client.bot.resolveAPIMessage(c, d.container, m)
         }
 
         return d.deflate(); 
