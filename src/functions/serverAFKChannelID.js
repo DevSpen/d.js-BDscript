@@ -1,5 +1,5 @@
 module.exports = {
-    name: "$serverAFKChannel",
+    name: "$serverAFKChannelID",
     description: "Returns a server’s AFK voice channel ID (which is set in server-settings).",
     brackets: true,
     optional: true,
