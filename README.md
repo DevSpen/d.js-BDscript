@@ -65,7 +65,7 @@ bot.variable([
 ])
 ```
 
-# Music #
+# Music (BROKEN) # 
 ---------------------------------
 Yes, you heard it right! We have added music functions for you to make a good use of voice channels.
 We only support ytdl-core currently but will soon have lavalink support!

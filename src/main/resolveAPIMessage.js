@@ -10,6 +10,8 @@ module.exports = async (channel, container, cnt, fn = "send") => {
     
     const content = cnt || container.code
 
+    options.content = content
+
     if (container.ephemeral) {
         options.ephemeral = true
     }
@@ -41,8 +43,8 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         delete container.updateInteraction
     }
 
-    const message = await channel[fn](content || null, options).catch(() => null)
-    
+    const message = await channel[fn](options).catch(() => null)
+
     if (channel.client?.bot.options.experimental) {
         container.embed = new MessageEmbed()
         container.components = []

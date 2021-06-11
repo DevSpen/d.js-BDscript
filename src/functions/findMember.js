@@ -43,6 +43,8 @@ module.exports = new Function({
             limit: 1 
         }).catch(() => null)
 
-        return d.deflate(members?.first()?.id ?? returnAuthorID === "yes" ? d.message?.author.id ?? "" : "")
+        const member = members.first()
+
+        return d.deflate(member ? member.id : returnAuthorID === "yes" ? d.message.author.id ?? "" : "")
     }
 })

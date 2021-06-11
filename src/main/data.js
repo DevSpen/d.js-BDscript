@@ -43,7 +43,6 @@ module.exports = {
     args: new Array(),
     /**
      * Stores all data for this current command that is being executed.
-     * @type {object}
      */
     container: {
         /**
@@ -134,6 +133,13 @@ module.exports = {
          * The embed to send as response.
          * @type {MessageEmbed}
          */
-        embed: new MessageEmbed() 
+        embed: new MessageEmbed(),
+        /**
+         * Data for a suppressed error.
+         */
+        suppressErrors: {
+            embed: new MessageEmbed(),
+            text: new String()
+        }
     }
 }

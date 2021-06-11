@@ -12,13 +12,18 @@ const Compile = require("../main/compiler")
 const parse = require("parse-ms")
 const StatusManager = require("./StatusManager")
 const commandData = require("../utils/commandData")
+const { CommandData, CommandTypes, DefaultBotOptions } = require("../utils/Constants")
 
 require("../prototypes/Strings")
 require("../prototypes/Objects")
 require("../prototypes/Arrays")
 
 module.exports = class Bot {
-    constructor(options = BotOptions) {
+    /**
+     * The bot instance.
+     * @param {DefaultBotOptions} options options to pass to the client.
+     */
+    constructor(options = {}) {
         if (!options.client) options.client = {}
 
         options.client.partials = ["USER", "MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER"]
@@ -179,32 +184,52 @@ module.exports = class Bot {
         return options 
     }
     
+    /**
+     * @private
+     */
     snowflake(id) {
         return `(${id})`
     }
     
-    command(opts = commandData) {
-        if (!opts.type) throw new Error(`Command is missing its type!`)
+    /**
+     * 
+     * @param {...CommandData} options the options for this command.
+     */
+    command(...options) {
+        for (const opts of options) {
+            if (Array.isArray(opts)) {
+                for (const opt of opts) {
+                    this.command(opt)
+                }
+                continue
+            }
+
+            if (!opts.type) throw new Error(`Command is missing its type!`)
         
-        const data = Commands[opts.type]
-        
-        if (!data) throw new Error(`Type '${opts.type}' is not a valid command type.`)
-        
-        for (const [property, required] of Object.entries(data)) {
-            if (!opts[property] && required) throw new Error(`command.${property} is required for '${opts.type}' command!`)
+            const data = Commands[opts.type]
+            
+            if (!data) throw new Error(`Type '${opts.type}' is not a valid command type.`)
+            
+            for (const [property, required] of Object.entries(data)) {
+                if (!opts[property] && required) throw new Error(`command.${property} is required for '${opts.type}' command!`)
+            }
+            
+            if (!this.commands.has(opts.type)) this.commands.set(opts.type, new Discord.Collection()) 
+            
+            opts.id = this.commands.get(opts.type).size
+            
+            opts.compiledName = Compile(this.client, opts.name ?? opts.channel ?? "") 
+            
+            opts.compiled = Compile(this.client, opts.code)
+            
+            this.commands.get(opts.type).set(opts.id, opts)
         }
-        
-        if (!this.commands.has(opts.type)) this.commands.set(opts.type, new Discord.Collection()) 
-        
-        opts.id = this.commands.get(opts.type).size
-        
-        opts.compiledName = Compile(this.client, opts.name ?? opts.channel ?? "") 
-        
-        opts.compiled = Compile(this.client, opts.code)
-        
-        this.commands.get(opts.type).set(opts.id, opts)
     }
     
+    /**
+     * Connects the client to discord.
+     * @param {string?} token the token to use to validate the websocket connection to discord.
+     */
     login(token) {
         this.db.createTable({
             name: "cooldowns",
@@ -247,6 +272,18 @@ module.exports = class Bot {
         this.db.connect()
     }
     
+    /**
+     * add multiple events to client.
+     * @param {string[]} events events to add to client.
+     */
+    addEvents(events = []) {
+        return this.addEvent(events)
+    }
+
+    /**
+     * Add event listeners to the client.
+     * @param {string|string[]} eventOrEvents events to enable on this client. 
+     */
     addEvent(eventOrEvents = []) {
         if (typeof eventOrEvents === "string") {
             const event = Listeners[eventOrEvents]

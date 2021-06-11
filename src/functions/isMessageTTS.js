@@ -3,6 +3,6 @@ module.exports = {
     returns: "?boolean",
     description: "Whether or not the author's message was Text-To-Speech.",
     execute: async d => {
-        return d.deflate(d.message?.tts || "")
+        return d.deflate(d.message?.tts ?? "")
     }
 }

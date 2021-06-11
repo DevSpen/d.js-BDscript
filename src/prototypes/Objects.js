@@ -79,10 +79,18 @@ module.exports.resolveAll = async function(d) {
 
 module.exports.sendError = function (d, ...error) {
     try {
-        if (error.length === 1) d.mainChannel.send(error[0])
-        else d.mainChannel.send(`:x: Invalid ${error[0]} '${error[1]}' in \`${d.value.func.name}\``)
+        if (d.container.suppressErrors) {
+            if (d.container.suppressErrors === true) {
+                return undefined
+            } else {
+                d.client.bot.resolveAPIMessage(d.mainChannel, d.container.suppressErrors.embed, d.container.suppressErrors.text)
+            }
+        } else {
+            if (error.length === 1) d.mainChannel.send(error[0])
+            else d.mainChannel.send(`:x: Invalid ${error[0]} '${error[1]}' in \`${d.value.func.name}\``)
+        }
     } catch (e) {
-        console.log(error)
+        console.log(e.message, error)
     }
     
     return undefined 
