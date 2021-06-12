@@ -3,6 +3,10 @@ module.exports = {
     brackets: true,
     description: "sets an embed footer",
     fields: [{
+        name: "embed index",
+        description: "the index of the embed to add this footer to, if no embed exists for that index, it'll be created.",
+        type: "number"
+    }, {
         name: "text",
         type: "string",
         description: "the text for the footer"
@@ -12,11 +16,11 @@ module.exports = {
         description: "the url for the footer icon"
     }],
     execute: async d => {
-        const [text, url] = (await d.resolveArray()) || []
+        const [index, text, url] = (await d.resolveArray()) || []
         
-        if (text === undefined) return undefined 
+        if (index === undefined) return undefined 
         
-        d.container.embed.setFooter(text, url)
+        d.container.getEmbed(index).setFooter(text, url)
         
         return d.deflate(d.value.id, "")
     }

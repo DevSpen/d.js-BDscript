@@ -27,18 +27,29 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     
     data.mainChannel = data.mainChannel ?? data.message?.channel 
     
+    data.bot = client.bot
+    
     data.container = {
         randoms: {},
         keywords: {}, 
         randomTexts: {}, 
         splits: [], 
+        attachments: [], 
         components: [], 
         randomStrings: {}, 
         invites: {},
+        getEmbed: (index) => {
+            index = Number(index) - 1 
+            const embed = data.container.embeds[index]
+            if (!embed) {
+                data.container.embeds.push(new Discord.MessageEmbed())
+                return data.container.embeds[data.container.embeds.length - 1]
+            } else return embed
+        },
         requests: {}, 
         array: pointer === "code" ? command.compiled.data : command.compiledName.data, 
         code: pointer === "code" ? command.compiled.code : command.compiledName.code, 
-        embed: new Discord.MessageEmbed() 
+        embeds: []
     }
     
     for (const value of data.container.array) {

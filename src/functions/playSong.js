@@ -1,6 +1,6 @@
-const player = require("../handlers/ytdlPlayer")
+const Function = require("../structures/Function")
 
-module.exports = {
+module.exports = new Function({
     name: "$playSong",
     description: "plays a specific song or queues it",
     optional: ["ffmpeg-static", "fluent-ffmpeg", "@discordjs/opus"],
@@ -39,7 +39,7 @@ $playSong[$guildID;https://youtube.com/playlist?list=PL4o29bINVT4EG_y-k5jGoOu3-A
         const cache = d.client.bot.ytdl_cache 
         
         if (guildID === undefined) return undefined
-        
+
         const guild = d.client.guilds.cache.get(guildID)
         
         if (!guild) return d.sendError("guildID", guildID)
@@ -47,12 +47,6 @@ $playSong[$guildID;https://youtube.com/playlist?list=PL4o29bINVT4EG_y-k5jGoOu3-A
         if (!["url", "search", "playlist"].includes(type)) return d.sendError("query type", type)
         
         const voice = guild.me.voice 
-        
-        if (!voice.channelID) return d.sendError(":x: Failed to get voice connection")
-        
-        if (!voice.connection) {
-            await voice.channel.join()
-        }
         
         let data;
         
@@ -149,55 +143,10 @@ $playSong[$guildID;https://youtube.com/playlist?list=PL4o29bINVT4EG_y-k5jGoOu3-A
         
         data.user = d.message?.author 
         
-        const servers = d.client.bot.ytdl_servers
+        const audio = d.bot.createAudioPlayer(guildID)
         
-        let queued = true 
-        
-        if (!servers.get(guildID)?.songs.length) {
-            queued = false 
-            
-            const srv = servers.get(guildID)
-            
-            const server = {
-                songs: [],
-                all_songs: [],
-                loop: srv?.loop ?? 0,
-                volume: srv?.volume ?? 100,
-                status: "stopped",
-                connection: voice.connection,
-                vc: voice,
-                text: d.message?.channel,
-            }
-            
-            if (type === "playlist") {
-                data.videos.map(video => {
-                    const dat = {
-                        url: video.url,
-                        title: video.title,
-                        duration: video.milis_length / 1000,
-                        thumbnail: video.thumbnail_url,
-                        user: d.message?.author,
-                        author: video.author.name,
-                    }
-                    server.songs.push(dat)
-                    server.all_songs.push(dat)
-                })
-            } else {
-                server.songs.push(data)
-                server.all_songs.push(data)
-            }
-            servers.set(guildID, server)
-            
-            await player(d.client, guild.id)
-        } else {
-            const server = servers.get(guild.id)
-            
-            server.songs.push(data)
-            server.all_songs.push(data)
-            
-            servers.set(guild.id, server)
-        }
-        
+        let queued = audio.enqueue(data)
+
         return d.deflate(status === "yes" ? !queued : "")
     }
-}
+})

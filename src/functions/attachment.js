@@ -21,7 +21,7 @@ module.exports = {
         
         if (url === undefined) return undefined
         
-        d.container.embed.attachFiles(new Discord.MessageAttachment(url, name))
+        d.container.attachments.push(new Discord.MessageAttachment(url, name))
         
         return d.deflate() 
     }

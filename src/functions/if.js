@@ -28,7 +28,34 @@ module.exports = {
        
         const operator = operators.find(op => condition.includes(op))
         
-        if (!operator) return d.sendError(`:x: Invalid operator in \`$if\``)
+        if (!operator) {
+            let [value1, value2] = condition.split(operator)
+        
+            value1 = await d.resolveCode(value1)
+            
+            if (value1 === undefined) return undefined
+
+            const bool = cond(value1)
+
+            if (bool === undefined) return d.sendError(`:x: Invalid operator in \`$if\``)
+            else {
+                if (bool && ifCode) {
+                    const c = await d.resolveCode(ifCode)
+                    
+                    if (c === undefined) return undefined
+                    
+                    return d.deflate(c) 
+                } else if (!bool && elseCode) {
+                    const c = await d.resolveCode(elseCode)
+                    
+                    if (c === undefined) return undefined
+                    
+                    return d.deflate(c) 
+                }
+                
+                return d.deflate() 
+            }
+        }
         
         let [value1, value2] = condition.split(operator)
         

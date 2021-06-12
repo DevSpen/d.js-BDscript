@@ -1,8 +1,14 @@
+const { MessageEmbed } = require("discord.js")
+
 module.exports = {
     name: "$addField",
     description: "Sets an embed field",
     examples: [],
     fields: [{
+        name: "embed index",
+        description: "the index of the embed to add this field to, if no embed exists for that index, it'll be created.",
+        type: "number"
+    }, {
         name: "name",
         description: "the name of the field",
         type: "string",
@@ -17,11 +23,11 @@ module.exports = {
     }],
     brackets: true,
     execute: async d => {
-        const [name, value, inline = "no"] = (await d.resolveArray()) || []
+        const [index, name, value, inline = "no"] = (await d.resolveArray()) || []
         
-        if (name === undefined) return undefined
-        
-        d.container.embed.addField(name, value, inline === "yes")
+        if (index === undefined) return undefined
+    
+        d.container.getEmbed(index).addField(name, value, inline === "yes")
         
         return d.deflate()
     }

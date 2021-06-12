@@ -5,7 +5,7 @@ module.exports = class CommandManager {
         this.bot = bot 
     }
     
-    refresh(debug) {
+    refresh(debug, experimental) {
         if (!this.path) return false 
         else {
             this.bot.commands.map((c, key) => c.map((command, id) => {
@@ -13,12 +13,12 @@ module.exports = class CommandManager {
                     this.bot.commands.get(key).delete(id)
                 }
             }))
-            this.load(this.path, debug, true)
+            this.load(this.path, debug, true, experimental)
             return true 
         }
     }
     
-    load(path = "./commands/", debug = false, override) {
+    load(path = "./commands/", debug = false, override, experimental = false) {
         if (this.path && !override) return this.refresh(debug)
         this.path = path 
         
@@ -31,14 +31,14 @@ module.exports = class CommandManager {
         const dotPath = `.${path}`
         
         if (debug) console.log(`Accessing ${dotPath}...`)
-        
+
         for (const file of fs.readdirSync(dotPath)) {
             if (fs.lstatSync(dotPath + file).isDirectory()) {
-                this.load(dotPath + file, debug)
+                this.load(dotPath + file, debug, true, experimental)
                 continue 
             }
             
-            const filePath = `${this.constructor.root}${process.cwd()}${path}${file}`
+            const filePath = `../../../../${path}${file}`
             
             delete require.cache[require.resolve(filePath)]
             

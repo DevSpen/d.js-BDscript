@@ -21,7 +21,22 @@ module.exports = {
         
         const operator = operators.find(a => condition.includes(a)) 
         
-        if (!operator) return d.sendError(`:x: Invalid operator in \`$onlyIf\``)
+        if (!operator) {
+            let [value1, value2] = condition.split(operator)
+        
+            value1 = await d.resolveCode(value1)
+            
+            if (value1 === undefined) return undefined
+
+            const bool = check(value1)
+
+            if (bool === undefined) return d.sendError(`:x: Invalid operator in \`$onlyIf\``)
+            else {
+                if (!bool) {
+                    return d.deflate(d.value.id, "", flds, code.join(";")) 
+                } else return d.deflate()
+            }
+        }
         
         const values = condition.split(operator)
         

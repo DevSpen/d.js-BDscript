@@ -5,6 +5,8 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         allowedMentions: {
             repliedUser: container.replyMention 
         },
+        embeds: [],
+        files: container.attachments, 
         components: container.components ?? []
     } 
     
@@ -16,18 +18,8 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         options.ephemeral = true
     }
 
-    if (container.embed?.length || container.embed?.image || container.embed?.author || container.embed?.thumbnail) options.embed = container.embed 
-    
-    if ((container.length || container?.image || container?.author || container?.thumbnail) && !options.embed) options.embed = container 
-    
-    if (container.embed?.files.length || container.files?.length) options.files = container.embed?.files || container.files 
-     
-    if (channel instanceof Webhook || channel instanceof CommandInteraction) {
-        if (options.embed) {
-            if (!options.embeds) options.embeds = [options.embed]
-            else options.embeds.push(options.embed)
-            delete options.embed
-        }
+    for (const embed of container.embeds) {
+        if ((embed.length || embed?.image || embed?.author || embed?.thumbnail)) options.embeds.push(embed)
     }
 
     if (fn === "send") {
@@ -51,6 +43,7 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         delete container.repliedUser
         delete container.replyMention
         delete container.replyWaiting
+        delete container.attachments
     }
 
     return message 

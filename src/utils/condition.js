@@ -1,4 +1,11 @@
 module.exports = (value1, operator, value2) => {
+    if (!operator) {
+        if (!["true", "false"].includes(value1)) {
+            return undefined
+        }
+        return value1 === "true"
+    }
+
     let pass = false
         
     if (!["!=", "=="].includes(operator)) {

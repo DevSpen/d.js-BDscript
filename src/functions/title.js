@@ -3,6 +3,10 @@ module.exports = {
     brackets: true,
     description: "sets an embed title",
     fields: [{
+        name: "embed index",
+        description: "the index of the embed to add this title to, if no embed exists for that index, it'll be created.",
+        type: "number"
+    }, {
         name: "text",
         type: "string",
         description: "the text for this title"
@@ -12,11 +16,11 @@ module.exports = {
         description: "the url for this title"
     }],
     execute: async d => {
-        const [text, url] = (await d.resolveArray()) || []
+        const [index, text, url] = (await d.resolveArray()) || []
         
-        if (text === undefined) return undefined
+        if (index === undefined) return undefined
         
-        d.container.embed.setTitle(text)
+        d.container.getEmbed(index).setTitle(text)
         
         if (url) d.container.embed.setURL(url) 
         

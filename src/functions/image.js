@@ -3,16 +3,22 @@ module.exports = {
     brackets: true,
     description: "sets an embed image",
     fields: [{
+        name: "embed index",
+        description: "the index of the embed to add this image to, if no embed exists for that index, it'll be created.",
+        type: "number"
+    }, {
         name: "url",
         type: "string",
         description: "the url for the image"
     }],
     execute: async d => {
-        const url = await d.resolveAll()
+        const [
+            index, url 
+        ] = await d.resolveArray() ?? []
         
-        if (url === undefined) return undefined
+        if (index === undefined) return undefined
         
-        d.container.embed.setImage(url)
+        d.container.getEmbed(index).setImage(url)
         
         return d.deflate() 
     }

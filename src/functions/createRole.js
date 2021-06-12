@@ -67,14 +67,12 @@ module.exports = {
         
         const role = await guild.roles.create({
             reason,
-            data: {
-                name,
-                color,
-                position: Number(position) ?? 1,
-                hoist: hoisted === "yes",
-                mentionable: mentionable === "yes",
-                permissions
-            }
+            name,
+            color,
+            position: Number(position) ?? 1,
+            hoist: hoisted === "yes",
+            mentionable: mentionable === "yes",
+            permissions
         }).catch(err => null)
         
         if (!role) return d.sendError(`:x: Failed to create role!`)

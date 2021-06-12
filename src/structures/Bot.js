@@ -13,6 +13,7 @@ const parse = require("parse-ms")
 const StatusManager = require("./StatusManager")
 const commandData = require("../utils/commandData")
 const { CommandData, CommandTypes, DefaultBotOptions } = require("../utils/Constants")
+const GuildAudioPlayer = require("./AudioPlayer")
 
 require("../prototypes/Strings")
 require("../prototypes/Objects")
@@ -38,17 +39,17 @@ module.exports = class Bot {
         
         this.slash_commands_data = new Discord.Collection()
 
-        Object.defineProperty(this, "manager", {
-            value: new CommandManager(this),
-            writable: false
-        })
+        this.manager = new CommandManager(this)
+
+        Object.defineProperty(this, "custom_functions", { value: new Discord.Collection() })
         
         Object.defineProperty(this, "listeners", { value: [] })
 
-        Object.defineProperty(this, "ytdl_servers", {
-            writable: false,
-            value: new Discord.Collection()
-        })
+        /**
+         * Players for ytdl.
+         * @type {Discord.Collection<string, GuildAudioPlayer>}
+         */
+        this.ytdl_servers = new Discord.Collection()
         
         Object.defineProperty(this, "ytdl_cache", {
             writable: false,
@@ -192,6 +193,15 @@ module.exports = class Bot {
     }
     
     /**
+     * Creates a function that can be called in a code through $callFunction.
+     * @param {string} name the function name.
+     * @param {string} code the code to call.
+     */
+    createFunction(name, code) {
+        this.custom_functions.set(name, code)
+    }
+
+    /**
      * 
      * @param {...CommandData} options the options for this command.
      */
@@ -296,7 +306,9 @@ module.exports = class Bot {
 
             this.listeners.push(eventOrEvents)
             
-            event[1](this.client) 
+            event[1](this.client)
+            
+            this.client.incrementMaxListeners()
         } else {
             for (const name of eventOrEvents) {
                 const event = Listeners[name]
@@ -311,7 +323,23 @@ module.exports = class Bot {
                 this.listeners.push(name)
 
                 event[1](this.client) 
+
+                this.client.incrementMaxListeners()
             }
         }
+    }
+
+    /**
+     * Creates a audio player.
+     * @param {string} guildID the id to create.
+     * @returns {GuildAudioPlayer}
+     */
+    createAudioPlayer(guildID) {
+        if (this.ytdl_servers.has(guildID)) {
+            return this.ytdl_servers.get(guildID)
+        }
+        const audio = new GuildAudioPlayer(this.client, guildID)
+        this.ytdl_servers.set(guildID, audio)
+        return audio
     }
 }

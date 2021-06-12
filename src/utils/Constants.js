@@ -1,5 +1,8 @@
 'use strict';
 
+const { User, Client, TextChannel, MessageActionRow, Message, MessageEmbed, MessageAttachment } = require("discord.js")
+const Bot = require("../structures/Bot")
+
 /**
  * The command type.
  * @typedef {string} CommandType
@@ -81,3 +84,80 @@ module.exports.CommandTypes = {
  * @property {string[]} channel the channel ID to send bot response to. 
  */
 
+/**
+ * @typedef {Object} TrackData
+ * @property {string} url the url to this song.
+ * @property {string} title the song title
+ * @property {string} uri the song uri.
+ * @property {string} image the image of the banner.
+ * @property {string} thumbnail the thumbnail.
+ * @property {string} duration the duration of the song. 
+ * @property {User} user the user that added this song.
+ */
+
+/**
+ * The type of a function field.
+ * @typedef {string} FieldType
+ * * boolean 
+ * * number
+ * * string
+ */
+
+/**
+ * @typedef {Object} FieldData
+ * @property {string} name the field name.
+ * @property {string} description the description for this field.
+ * @property {FieldType} type the type of this field.
+ * @property {boolean} required whether this field is required
+ * @property {Any} default the default value of the field. 
+ */
+
+/**
+ * 
+ * @typedef {Object} Container 
+ * @property {object} randomStrings the generated strings.
+ * @property {object} randoms the random numbers.
+ * @property {object} randomTexts the random texts.
+ * @property {MessageEmbed[]} embeds the embeds to send.
+ * @property {MessageActionRow[]} components the component rows.
+ * @property {MessageAttachment[]} attachments the attachments to send.
+ * @property {boolean} replyInteraction whether this is a reply to an interaction.
+ * @property {boolean} ephemeral whether this response will be ephemeral.
+ * @property {boolean} replyMention whether this response will mention the user.
+ * @property {boolean} replyWaiting whether this response is waiting to be undeferred.
+ * @property {object} invites the invites for this execution.
+ * @property {object} keywords created local variables. 
+ */
+
+/**
+ * @typedef {Object} DataExecution
+ * @property {Client} client the client of this connection.
+ * @property {TextChannel} mainChannel the channel to send errors in.
+ * @property {Bot} bot the instance of d.js-bdscript. 
+ * @property {TextChannel} channel the channel this data will be sent to.
+ * @property {Message} message the data for this event.
+ * @property {object} data the extras of this function.
+ * @property {Container} container the container for this execution. 
+ */
+
+/**
+ * 
+ * @param {DataExecution} DATA the data used to execute this command.
+ * @returns {Object}
+ */
+function execute(DATA = {}) {}
+
+/**
+ * @typedef {Object} FunctionData
+ * @property {string[]} examples examples for this function usage.
+ * @property {string} name the name for the function. 
+ * @property {string} description the description for this function.
+ * @property {?FieldData[]} fields the fields for this function. 
+ * @property {string} returns what does the function return.
+ * @property {boolean} brackets whether this function uses brackets.
+ * @property {boolean} optional whether these brackets are optional.
+ * @property {string[]} requires modules required to run this function.
+ * @property {string[]} optional_modules optional modules to improve this function performance.
+ * @property {boolean} disabled whether this function is disabled. 
+ * @property {execute} execute the function handling the function. 
+ */

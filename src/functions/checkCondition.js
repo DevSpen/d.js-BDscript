@@ -16,7 +16,18 @@ module.exports = {
         
         const operator = operators.find(op => condition.includes(op))
         
-        if (!operator) return d.sendError(`:x: Invalid operator in \`$checkCondition\``)
+        if (!operator) {
+            let [value1, value2] = condition.split(operator)
+        
+            value1 = await d.resolveCode(value1)
+            
+            if (value1 === undefined) return undefined
+
+            const bool = cond(value1)
+
+            if (bool === undefined) return d.sendError(`:x: Invalid operator in \`$checkCondition\``)
+            else return d.deflate(bool)
+        }
         
         let [value1, value2] = condition.split(operator)
         

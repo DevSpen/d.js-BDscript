@@ -3,6 +3,10 @@ module.exports = {
     brackets: true,
     description: "sets an embed author",
     fields: [{
+        name: "embed index",
+        description: "the index of the embed to add this author to, if no embed exists for that index, it'll be created.",
+        type: "number"
+    }, {
         name: "text",
         type: "string",
         description: "the text for the author"
@@ -17,6 +21,7 @@ module.exports = {
     }],
     execute: async d => {
         const [
+            index, 
             text,
             icon,
             hover 
@@ -24,7 +29,7 @@ module.exports = {
         
         if (text === undefined) return undefined
         
-        d.container.embed.setAuthor(text, icon, hover)
+        d.container.getEmbed(index).setAuthor(text, icon, hover)
         
         return d.deflate() 
     }
