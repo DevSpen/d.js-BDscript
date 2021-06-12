@@ -1,4 +1,4 @@
-# d.js-BDscript #
+# D.js-BDscript #
 ## REQUIRES NODEJS VERSION 14 OR EARLIER ##
 ---------------------------------
 Want to use beta version of the package? Use `npm i https://github.com/Rubenennj/d.js-BDscript` to install upcoming updates.
@@ -7,7 +7,7 @@ Inspired in [Bot Designer For Discord](https://discord.gg/bot)
 
 Need help? Or hang out with other users who use this package? Then don't hesitate to join [here](https://discord.gg/ezcdhQ8n)!
 
-# Base for a d.js-BDscript bot #
+# Base for a D.js-BDscript bot #
 ---------------------------------
 
 ```js
@@ -59,7 +59,7 @@ bot.variable([
 ])
 ```
 
-# Music (BROKEN) # 
+# Music (Deprecated) # 
 ---------------------------------
 Yes, you heard it right! We have added music functions for you to make a good use of voice channels.
 We only support ytdl-core currently but will soon have lavalink support!
