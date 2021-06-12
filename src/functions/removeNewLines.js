@@ -13,6 +13,6 @@ module.exports = {
     
         if (code === undefined) return undefined
     
-        return d.deflate(code.replace(/(\r\n|\n|\r)/gm, ''))
+        return d.deflate(code.replace(/(\r\n|\n|\r)/gm, '').trim())
     }
 }
