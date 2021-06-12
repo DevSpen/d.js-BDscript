@@ -1,3 +1,1 @@
-declare enum CommandType {
-    command = 0
-}
+type ActivityType = 'PLAYING' | 'STREAMING' | 'LISTENING' | 'WATCHING' | 'CUSTOM_STATUS' | 'COMPETING';

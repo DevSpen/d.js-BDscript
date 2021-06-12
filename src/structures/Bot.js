@@ -22,7 +22,7 @@ require("../prototypes/Arrays")
 module.exports = class Bot {
     /**
      * The bot instance.
-     * @param {DefaultBotOptions} options options to pass to the client.
+     * @param {import("../utils/Constants").BotOptions} options options to pass to the client.
      */
     constructor(options = {}) {
         if (!options.client) options.client = {}
@@ -31,14 +31,34 @@ module.exports = class Bot {
                 
         options = this._resolve(options) 
         
+        /**
+         * The discord.js client.
+         * @type {Discord.Client}
+         */
         this.client = new Discord.Client(options.client)
         
+        /**
+         * Interval manager.
+         * @type {Discord.Collection<string, any>}
+         */
         this.intervals = new Discord.Collection()
         
+        /**
+         * Manager of commands.
+         * @type {Discord.Collection<string, Discord.Collection<string, CommandData>>}
+         */
         this.commands = new Discord.Collection() 
         
+        /**
+         * Manager of slash commands.
+         * @type {Discord.Collection}
+         */
         this.slash_commands_data = new Discord.Collection()
 
+        /**
+         * The command manager.
+         * @type {CommandManager}
+         */
         this.manager = new CommandManager(this)
 
         Object.defineProperty(this, "custom_functions", { value: new Discord.Collection() })
@@ -70,11 +90,12 @@ module.exports = class Bot {
             writable: false,
             value: Compile
         })
-        
-        Object.defineProperty(this, "resolveAPIMessage", {
-            writable: false,
-            value: ResolveAPIMessage
-        })
+
+        /**
+         * Resolves a message.
+         * @type {ResolveAPIMessage}
+         */
+        this.resolveAPIMessage = ResolveAPIMessage
         
         Object.defineProperty(this, "interpreter", {
             writable: false,
@@ -86,15 +107,22 @@ module.exports = class Bot {
             value: Parser() 
         })
 
-        Object.defineProperty(this, "status", {
-            writable: false,
-            value: new StatusManager(this)
-        })
+        /**
+         * The status manager for this bot.
+         * @type {StatusManager}
+         */
+        this.status = new StatusManager(this)
         
-        Object.defineProperty(this, "variables", {
-            value: [] 
-        })
+        /**
+         * Holds all variables that were created.
+         * @type {import("../utils/Constants").Variable[]}
+         */
+        this.variables = []
 
+        /**
+         * Options passed to bot.
+         * @type {import("../utils/Constants").BotOptions}
+         */
         this.options = options 
         
         Object.defineProperty(this, "db", {
@@ -105,6 +133,40 @@ module.exports = class Bot {
         })
     }
     
+    /**
+     * Add a variable or variables.
+     * @param {import("../utils/Constants").Variable[]|import("../utils/Constants").Variable} data 
+     * @example 
+     * Bot.addVariable({
+     *      name: "hi",
+     *      value: 1,
+     *      type: "integer"
+     * })
+     */
+    addVariable(data) {
+        this.variable(data)
+    }
+
+    /**
+     * Add a status or statuses to the bot.
+     * @param  {...import("../utils/Constants").StatusData} data the status or statuses.
+     * @returns 
+     */
+    addStatus(...data) {
+        return this.status.add(data)
+    }
+
+    /**
+     * Add a variable of variables, depending on the input.
+     * @param {import("../utils/Constants").Variable|import("../utils/Constants").Variable[]} varOrVars 
+     * @returns {void}
+     * @example 
+     * Bot.variable({
+     *      name: "test",
+     *      type: "integer",
+     *      value: 1
+     * })
+     */
     variable(varOrVars) {
         if (Array.isArray(varOrVars)) {
             return varOrVars.map(v => this.variables.push(this.resolveVar(v))) 
@@ -119,6 +181,12 @@ module.exports = class Bot {
         }
     }
     
+    /**
+     * Private function.
+     * @param {object} data 
+     * @private
+     * @returns {object}
+     */
     resolveVar(data) {
         return {
             name: data.name,
@@ -238,7 +306,7 @@ module.exports = class Bot {
     
     /**
      * Connects the client to discord.
-     * @param {string?} token the token to use to validate the websocket connection to discord.
+     * @param {?string} token the token to use to validate the websocket connection to discord.
      */
     login(token) {
         this.db.createTable({

@@ -1,6 +1,6 @@
 'use strict';
 
-const { User, Client, TextChannel, MessageActionRow, Message, MessageEmbed, MessageAttachment } = require("discord.js")
+const { User, Client, TextChannel, ActivityType, ClientOptions, MessageActionRow, PresenceStatusData, Message, MessageEmbed, MessageAttachment } = require("discord.js")
 const Bot = require("../structures/Bot")
 
 /**
@@ -21,18 +21,6 @@ function createEnum(keys) {
     return obj;
 }
 
-/**
- * Default options for client
- * @property {boolean} [respondToBots=false] whether to respond to bots
- * @property {boolean} [guildOnly=true] whether the bot can only be used in guilds.
- * @property {ClientOptions} [ClientOptions={}] the options for the discord.js client.
- * @property {string} token the token to use for this bot.
- * @property {boolean} [mentionAsPrefix=false] whether the bot can respond when it is mentioned as a form or prefix.
- * @property {string[]} users the users this bot will react to.
- * @property {string|string[]} prefix the prefix or prefixes for this bot.
- * @property {boolean} [experimental=false] whether to enable experimental mode.
- * @property {string|string[]} intents the intent or intents to pass to client.
- */ 
 exports.DefaultBotOptions = {
     respondToBots: false,
     guildOnly: true,
@@ -113,6 +101,44 @@ module.exports.CommandTypes = {
  */
 
 /**
+ * @typedef {Object} StatusData
+ * @property {number} duration the duration for this status in ms.
+ * @property {?PresenceStatusData} presence the presence for this status.  
+ * @property {?ActivityType} type the activity type.
+ * @property {?string} url the url for the streaming status.
+ * @property {?boolean} idle whether the client is idle.
+ * @property {string} name the status text / name.
+ */
+
+/**
+ * 
+ * @typedef {string} Intent The intents to enable (through array), or one of these strings:
+ * * `all` - Enables all intents. 
+ * * `non_privileged` - Enables all intents except privileged ones.
+ * @example "all"
+ * @example ["guilds", "guildintegrations"]
+ */
+
+/**
+ * @typedef {string} Intents Available intents:
+ * * guilds
+ * * guildmembers
+ * * guildbans
+ * * guildemojis
+ * * guildintegrations
+ * * guildwebhooks
+ * * guildinvites
+ * * guildvoicestates
+ * * guildpresences
+ * * guildmessages
+ * * guildmessagereactions
+ * * guildmessagetyping
+ * * directmessages
+ * * directmessagereactions
+ * * directmessagetyping
+ */
+
+/**
  * 
  * @typedef {Object} Container 
  * @property {object} randomStrings the generated strings.
@@ -120,6 +146,7 @@ module.exports.CommandTypes = {
  * @property {object} randomTexts the random texts.
  * @property {MessageEmbed[]} embeds the embeds to send.
  * @property {MessageActionRow[]} components the component rows.
+ * @property {boolean} updateInteraction whether this reply will update an interaction. 
  * @property {MessageAttachment[]} attachments the attachments to send.
  * @property {boolean} replyInteraction whether this is a reply to an interaction.
  * @property {boolean} ephemeral whether this response will be ephemeral.
@@ -160,4 +187,26 @@ function execute(DATA = {}) {}
  * @property {string[]} optional_modules optional modules to improve this function performance.
  * @property {boolean} disabled whether this function is disabled. 
  * @property {execute} execute the function handling the function. 
+ */
+
+/**
+ * Options for client
+ * @typedef {Object} BotOptions
+ * @property {boolean} [respondToBots=false] whether to respond to bots
+ * @property {boolean} [guildOnly=true] whether the bot can only be used in guilds.
+ * @property {ClientOptions} [client={}] the options for the discord.js client.
+ * @property {string} token the token to use for this bot.
+ * @property {boolean} [mentionAsPrefix=false] whether the bot can respond when it is mentioned as a form or prefix.
+ * @property {string[]} users the users this bot will react to.
+ * @property {string|string[]} prefix the prefix or prefixes for this bot.
+ * @property {boolean} [experimental=false] whether to enable experimental mode.
+ * @property {Intents[]|string} intents the intent or intents to pass to client.
+ */ 
+
+/**
+ * Variable data.
+ * @typedef {Object} Variable
+ * @property {string} name the name for this variable.
+ * @property {string} type the type for this variable, either "string" or "integer".
+ * @property {any} value default value for this variable. 
  */

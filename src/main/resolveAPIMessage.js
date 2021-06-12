@@ -1,5 +1,13 @@
-const { Webhook, CommandInteraction, MessageEmbed } = require("discord.js")
+const { Webhook, CommandInteraction, MessageEmbed, TextChannel, Message, DMChannel } = require("discord.js")
 
+/**
+ * 
+ * @param {TextChannel|Webhook|CommandInteraction|Message|DMChannel} channel the channel to send this message to.
+ * @param {import("../utils/Constants").Container} container the container for this execution. 
+ * @param {?string} cnt content to send.  
+ * @param {?string} [fn="send"] the function to cast over channel.  
+ * @returns {Promise<Message|object>}
+ */
 module.exports = async (channel, container, cnt, fn = "send") => {
     const options = {
         allowedMentions: {

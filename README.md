@@ -13,6 +13,8 @@ Need help? Or hang out with other users who use this package? Then don't hesitat
 ```js
 const bdjs = require("d.js-bdscript")
 
+const { EventTypes, CommandTypes } = require("d.js-bdscript/src/utils/Constants")
+
 const bot = new bdjs({
     token: "token here", //bot token
     intents: "all", //intents (array) to enable for the bot, check /intents for all intents. (discord)
@@ -20,12 +22,14 @@ const bot = new bdjs({
 })
 
 bot.command({
-    type: "command", //the command type, "command" stands for message event commands
+    type: CommandTypes.command, //the command type, CommandTypes.command (behaves same as "command") stands for message event commands
     name: "say", //command trigger
     code: "$message"
 })
 
-bot.addEvent("onMessage") //add message callback
+bot.addEvent([
+    EventTypes.onMessage //behaves same as "onMessage"
+]) //add message callback
 
 bot.login() //logs the bot on discord
 ```
@@ -45,16 +49,6 @@ bot.variable({
 ```
 
 ## Method 2: ##
-```js 
-bot.variable({
-    money: {
-        value: 0,
-        type: "integer"
-    }
-})
-```
-
-## Method 3: ##
 ```js 
 bot.variable([
     {

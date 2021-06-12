@@ -1,10 +1,33 @@
+const Bot = require("./Bot")
+
 module.exports = class StatusManager {
+    /**
+     * Creates a status manager.
+     * @param {Bot} bot the client this manager will refer to.
+     */
     constructor(bot) {
+        /**
+         * The bot this manager is attached to.
+         * @type {Bot}
+         */
         this.bot = bot
-        this.current = 0 
+
+        /**
+         * Current status.
+         * @type {number}
+         */
+        this.current = 0
+        
+        /**
+         * Array of statuses to cycle through.
+         * @type {import("../utils/Constants").StatusData[]}
+         */
         this.statuses = []
     }
     
+    /**
+     * Cycles over given statuses.
+     */
     async start() {
         if (!this.statuses.length) return undefined
         
@@ -37,6 +60,10 @@ module.exports = class StatusManager {
         this.start() 
     }
     
+    /**
+     * Add an status or multiple statuses.
+     * @param  {...import("../utils/Constants").StatusData} data the status data. 
+     */
     add(...data) {
         data.map(d => {
             if (Array.isArray(d)) {

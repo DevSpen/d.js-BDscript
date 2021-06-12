@@ -1,10 +1,25 @@
 const fs = require("fs")
+const Bot = require("./Bot")
 
 module.exports = class CommandManager {
+    /**
+     * Instantiates a command manager.
+     * @param {Bot} bot the bot this manager belongs to.
+     */
     constructor(bot) {
+        /**
+         * The bot this manager refers to.
+         * @type {Bot}
+         */
         this.bot = bot 
     }
     
+    /**
+     * Refreshes the commands.
+     * @param {boolean} debug whether to log commands and directories that are loaded.
+     * @param {boolean} experimental unused
+     * @returns {boolean}
+     */
     refresh(debug, experimental) {
         if (!this.path) return false 
         else {
@@ -18,6 +33,14 @@ module.exports = class CommandManager {
         }
     }
     
+    /**
+     * loads all commands in a directory.
+     * @param {string} path the path to load commands from.  
+     * @param {boolean} debug whether to log debug data.  
+     * @param {boolean} override unused.
+     * @param {boolean} experimental unused.
+     * @returns 
+     */
     load(path = "./commands/", debug = false, override, experimental = false) {
         if (this.path && !override) return this.refresh(debug)
         this.path = path 
@@ -52,10 +75,17 @@ module.exports = class CommandManager {
         }
     }
     
+    /**
+     * Adds a command to bot.
+     * @param {import("../utils/Constants").CommandData|import("../utils/Constants").CommandData[]} data the command data. 
+     */
     add(data) {
         this.bot.command(data) 
     }
     
+    /**
+     * @private
+     */
     static get root() {
         return "../".repeat(10) 
     }
