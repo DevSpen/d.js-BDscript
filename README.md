@@ -63,12 +63,10 @@ bot.variable([
 ---------------------------------
 Yes, you heard it right! We have added music functions for you to make a good use of voice channels.
 We only support ytdl-core currently but will soon have lavalink support!
-To start off you need to install these dependencies as music dependencies are not pre-installed to keep the package clean.
-
+To staff off you need to install these packages since they are not installed by default.
+```js
+npm i yt-search ffmpeg opusscript ytfps
 ```
-npm i ytdl-core ffmpeg yt-search ytfps opusscript
-```
-
 You can optionally install `@discordjs/opus` and `ffmpeg-static` for better experience.
 
 Here is a small example of how you would play a song through youtube search (query):
@@ -90,7 +88,8 @@ Bot.command({
 
 # Slash Commands #
 ---------------------------------
-We also support slash commands as of 5.0.0 
+We also support slash commands as of 5.0.0
+
 To make slash commands, you first need to define its info through `Bot.createSlashCommandData()`.
 ```js
 Bot.createSlashCommandData({

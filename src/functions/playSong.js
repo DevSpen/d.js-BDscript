@@ -3,8 +3,8 @@ const Function = require("../structures/Function")
 module.exports = new Function({
     name: "$playSong",
     description: "plays a specific song or queues it",
-    optional: ["ffmpeg-static", "fluent-ffmpeg", "@discordjs/opus"],
-    requires: ["yt-seach", "ytdl-core", "ffmpeg", "opusscript", "ytfps"],
+    optional_modules: ["ffmpeg-static", "fluent-ffmpeg", "@discordjs/opus"],
+    requires: ["yt-seach", "ffmpeg", "opusscript", "ytfps"],
     returns: "?string",
     examples: [`//Playing by query
 $playSong[$guildID;lovers on the sun;search]`, `//Playing by url
