@@ -18,8 +18,6 @@ module.exports = {
             return d.deflate(d.message?.member?.voice.channelID ?? "")
         }
 
-        console.log("throw array", d.value.func.name)
-
         const [
             guildID,
             userID
