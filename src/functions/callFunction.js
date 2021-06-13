@@ -33,7 +33,7 @@ module.exports = new Function({
         
         if (!data) return undefined
 
-        d.container.embed = data.embed
+        d.container.embeds = d.container.embeds.concat(data.embeds)
         d.container.components = data.components
         d.container.replyMention = data.replyMention
         d.container.replyWaiting = data.replyWaiting
