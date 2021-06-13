@@ -25,7 +25,17 @@ module.exports = {
                 return d.deflate()
             }
         }
-        
-        return d.deflate(d.value.id, "", d.fieldsIn(error), error) 
+
+        const err = await d.resolveCode(error)
+
+        if (err === undefined) return undefined
+
+        d.client.bot.resolveAPIMessage(
+            d.mainChannel,
+            d.container,
+            err
+        ) 
+
+        d.container.return = true
     }
 }

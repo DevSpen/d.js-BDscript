@@ -10,7 +10,7 @@ module.exports = {
         type: "string"
     }],
     brackets: true,
-    execute: async (d = data) => {
+    execute: async (d) => {
         const channelID = await d.resolveAll()
         
         if (channelID === undefined) return undefined

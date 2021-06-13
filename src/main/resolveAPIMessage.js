@@ -18,7 +18,7 @@ module.exports = async (channel, container, cnt, fn = "send") => {
         components: container.components ?? []
     } 
     
-    const content = cnt || container.code
+    const content = cnt ?? container.code
 
     options.content = content
 

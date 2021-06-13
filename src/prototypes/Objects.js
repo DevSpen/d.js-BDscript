@@ -15,9 +15,12 @@ module.exports.deflate = function (d, id, data, stop = false, code) {
 }
 
 module.exports.resolveArray = async function(d) {
+    d.temp = d.value 
+
     const array = []
     for (const code of d.value.splits) {
         const data = await d.resolveCode(code)
+        d.value = d.temp
         if (typeof code === "undefined") return undefined 
         else array.push(data) 
     }
@@ -62,9 +65,11 @@ module.exports.resolveField = async function(d, index) {
 }
 
 module.exports.resolveAll = async function(d) {
+    d.temp = d.value 
     let text = d.value.inside 
-    
+
     for (const val of d.value.fields) {
+        d.value = d.temp
         let data = d
         data.value = val 
         const replacer = await val.func.execute(data, true)

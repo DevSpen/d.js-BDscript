@@ -17,14 +17,16 @@ module.exports = {
         if (!d.value.inside) {
             return d.deflate(d.message?.member?.voice.channelID ?? "")
         }
-        
+
+        console.log("throw array", d.value.func.name)
+
         const [
             guildID,
             userID
-        ] = (await d.resolveArray()) || []
+        ] = (await d.resolveArray()) ?? []
         
         if (guildID === undefined) return undefined
-        
+
         const guild = d.client.guilds.cache.get(guildID)
             
         if (!guild) return d.sendError("guildID", guildID)

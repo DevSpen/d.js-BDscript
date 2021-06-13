@@ -3,6 +3,7 @@ module.exports = {
     userID: ".author?.id",
     messageID: ".id",
     channelID: ".channel?.id",
+    color: (n) => `.embeds[${n}]?.color`, 
     title: (n) => `.embeds[${n}]?.title`,
     description: (n) => `.embeds[${n}]?.description`,
     fieldName: (n, fld) => `.embeds[${n}]?.fields?.[${fld}]?.name`,

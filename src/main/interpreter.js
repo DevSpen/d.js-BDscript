@@ -56,7 +56,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
         data.value = value 
         data.backup = value
         const res = await value.func.execute(data) 
-        if (!res) return 
+        if (!res) return
         else {
             data.container.code = data.container.code.replace(res.id, res.with)
             if (data.container.return) {
@@ -71,7 +71,7 @@ module.exports = async (client, data = {}, returnCode = false, pointer = "code")
     }
    
     if (returnCode) return data.container
-    
+
     if (data.channel) {
         const m = await client.bot.resolveAPIMessage(
             data.container.reply ? data.message : data.channel, 
