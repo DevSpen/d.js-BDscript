@@ -10,7 +10,7 @@ module.exports = {
             type: "string"
         }
     ],
-    returns: "?string",
+    returns: "?number",
     execute: async d => {
         if (d.value.inside) {
             const guildID = await d.resolveAll()
