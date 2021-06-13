@@ -1,6 +1,6 @@
 module.exports = {
     name: "$shardID",
-    description: "Returns what shard a server is on. (if sharding is active)",
+    description: "Returns what shard a server is on.",
     brackets: true,
     optional: true,
     fields: [
