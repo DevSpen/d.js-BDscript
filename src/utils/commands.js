@@ -20,6 +20,14 @@ module.exports = {
         channel: true,
         code: true
     },
+    botAddCommand: {
+        channel: true,
+        code: true
+    },
+    botLeaveCommand: {
+        channel: true,
+        code: true 
+    },
     deleteCommand: {
         channel: true,
         code: true,

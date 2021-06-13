@@ -1,4 +1,6 @@
 module.exports = {
+    onBotGuildLeave: ["guildDelete", (client) => client.on("guildDelete", (g) => require("../events/guildDelete")(client, g))],
+    onBotGuildAdd: ["guildCreate", (client) => client.on("guildCreate", (g) => require("../events/guildCreate")(client, g))],
     onInteraction: ["interaction", (client) => client.on("interaction", (i) => require("../events/interaction")(client, i))], 
     onMusicStart: ["guildMusicStart", (client) => client.on("guildMusicStart", (guild, song) => require("../events/guildMusicStart")(client, guild, song))],
     onMusicEnd: ["guildMusicEnd", (client) => client.on("guildMusicEnd", (guild, song) => require("../events/guildMusicEnd")(client, guild, song))],
