@@ -14,6 +14,9 @@ const StatusManager = require("./StatusManager")
 const commandData = require("../utils/commandData")
 const { CommandData, CommandTypes, DefaultBotOptions } = require("../utils/Constants")
 const GuildAudioPlayer = require("./AudioPlayer")
+const Constants = require("../utils/Constants")
+const Function = require("./Function")
+const Track = require("./Track")
 
 require("../prototypes/Strings")
 require("../prototypes/Objects")
@@ -409,5 +412,48 @@ module.exports = class Bot {
         const audio = new GuildAudioPlayer(this.client, guildID)
         this.ytdl_servers.set(guildID, audio)
         return audio
+    }
+
+    /**
+     * These are just for typings
+     */
+
+    /**
+     * @type {Constants}
+     */
+    static get Constants() {
+        return Constants
+    }
+
+    /**
+     * @type {CommandManager}
+     */
+    static get CommandManager() {}
+
+    /**
+     * @type {StatusManager}
+     */
+    static get StatusManager() {}
+
+    /**
+     * @type {GuildAudioPlayer}
+     */
+    static get AudioPlayer() {}
+
+    /**
+     * @type {Function}
+     */
+    static get Function() {}
+
+    /**
+     * @type {Track}
+     */
+    static get Track() {}
+
+    /**
+     * @type {string}
+     */
+    static get version() {
+        return require("../../package.json").version
     }
 }

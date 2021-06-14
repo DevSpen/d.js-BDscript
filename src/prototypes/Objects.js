@@ -92,7 +92,7 @@ module.exports.sendError = function (d, ...error) {
             }
         } else {
             if (error.length === 1) d.mainChannel.send(error[0])
-            else d.mainChannel.send(`:x: Invalid ${error[0]} '${error[1]}' in \`${d.value.func.name}\``)
+            else d.mainChannel.send(`:x: Invalid ${error[0]} '${error[1]}' in \`${d.temp?.func.name ?? d.value.func.name}\``)
         }
     } catch (e) {
         console.log(e.message, error)

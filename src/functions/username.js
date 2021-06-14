@@ -12,7 +12,7 @@ module.exports = {
     execute: async d => {
         if (d.value.inside) {
             const userID = await d.resolveAll()
-            
+    
             if (userID === undefined) return undefined
             
             const user = await d.client.users.fetch(userID).catch(err => null)

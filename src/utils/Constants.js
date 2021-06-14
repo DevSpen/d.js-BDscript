@@ -1,6 +1,6 @@
 'use strict';
 
-const { User, Client, TextChannel, ActivityType, ClientOptions, MessageActionRow, PresenceStatusData, Message, MessageEmbed, MessageAttachment } = require("discord.js")
+const { User, Client, TextChannel, ActivityType, ClientOptions, MessageActionRow, PresenceStatusData, Message, MessageEmbed, MessageAttachment, Invite } = require("discord.js")
 const Bot = require("../structures/Bot")
 
 /**
@@ -143,11 +143,21 @@ module.exports.CommandTypes = {
  */
 
 /**
+ * Returns a message embed object with given index. 
+ * @param {number|string} index the index of the embed.
+ * @returns {MessageEmbed}
+ */
+function getEmbed(index) {}
+
+/**
  * 
  * @typedef {Object} Container 
- * @property {object} randomStrings the generated strings.
- * @property {object} randoms the random numbers.
- * @property {object} randomTexts the random texts.
+ * @property {Object<string, object>} requests the cached http requests.
+ * @property {string[]} splits the text split elements.
+ * @property {getEmbed} getEmbed gets an embed from given index.
+ * @property {Object<string, string>} randomStrings the generated strings.
+ * @property {Object<string, string>} randoms the random numbers.
+ * @property {Object<string, string>} randomTexts the random texts.
  * @property {MessageEmbed[]} embeds the embeds to send.
  * @property {MessageActionRow[]} components the component rows.
  * @property {boolean} updateInteraction whether this reply will update an interaction. 
@@ -156,9 +166,36 @@ module.exports.CommandTypes = {
  * @property {boolean} ephemeral whether this response will be ephemeral.
  * @property {boolean} replyMention whether this response will mention the user.
  * @property {boolean} replyWaiting whether this response is waiting to be undeferred.
- * @property {object} invites the invites for this execution.
- * @property {object} keywords created local variables. 
+ * @property {Object<string, Invite>} invites the invites for this execution.
+ * @property {Object<string, string>} keywords created local variables. 
  */
+
+/**
+ * Sends an error to a channel.
+ * @param {...string} error the error to send. 
+ */
+function sendError(...error) {}
+/**
+ * Deflates given value.
+ * @param {any} value value to return.  
+ */
+function deflate(value) {}
+/**
+ * Resolves all code.
+ * @returns {Promise<string|undefined>}
+ */
+async function resolveAll() {}
+/**
+ * Resolves code in array.
+ * @returns {Promise<Array<string>|undefined>}
+ */
+async function resolveArray() {}
+/**
+ * Resolves given code.
+ * @param {string} code code to resolve. 
+ * @returns {Promise<string|undefined>}
+ */
+async function resolveCode(code) {}
 
 /**
  * @typedef {Object} DataExecution
@@ -168,6 +205,11 @@ module.exports.CommandTypes = {
  * @property {TextChannel} channel the channel this data will be sent to.
  * @property {Message} message the data for this event.
  * @property {object} data the extras of this function.
+ * @property {resolveAll} resolveAll resolves all the code.
+ * @property {resolveCode} resolveCode resolves given code.
+ * @property {resolveArray} resolveArray resolves the string in an array.
+ * @property {deflate} deflate returns the execution.
+ * @property {sendError} sendError sends a error to the channel.
  * @property {Container} container the container for this execution. 
  */
 
@@ -213,4 +255,8 @@ function execute(DATA = {}) {}
  * @property {string} name the name for this variable.
  * @property {string} type the type for this variable, either "string" or "integer".
  * @property {any} value default value for this variable. 
+ */
+
+/**
+ * Functions here were for typings.
  */

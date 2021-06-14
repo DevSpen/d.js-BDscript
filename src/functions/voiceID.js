@@ -22,14 +22,14 @@ module.exports = {
             guildID,
             userID
         ] = (await d.resolveArray()) ?? []
-        
+
         if (guildID === undefined) return undefined
 
         const guild = d.client.guilds.cache.get(guildID)
             
         if (!guild) return d.sendError("guildID", guildID)
             
-        const member = await guild.members.fetch(userID).catch(err => null)
+        const member = await guild.members.fetch(userID || "1").catch(err => null)
           
         if (!member) return d.sendError("userID", userID)
         
