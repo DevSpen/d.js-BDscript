@@ -345,7 +345,7 @@ module.exports = class Bot {
         this.db.once("ready", () => {
             console.log("Database ready!")
             this.client.once("ready", () => {
-                console.log("Client ready!")
+                console.log("Client ready! Using D.js-BDscript v" + this.constructor.version)
                 this.status.start() 
             })
             this.client.login(this.options.token || token)
