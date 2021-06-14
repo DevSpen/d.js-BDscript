@@ -21,9 +21,9 @@ module.exports = {
 
             if (!guild) return d.sendError("guildID", guildID)
 
-            return d.deflate(guild.explicitContentFilter)
+            return d.deflate(guild.explicitContentFilter.toTitle())
         } else {
-            return d.deflate(d.message?.guild?.explicitContentFilter ?? "")
+            return d.deflate(d.message?.guild?.explicitContentFilter.toTitle() ?? "")
         }
     }
 }

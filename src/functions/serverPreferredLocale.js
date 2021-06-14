@@ -23,7 +23,7 @@ module.exports = {
 
             return d.deflate(guild.preferredLocale)
         } else {
-            return d.deflate(d.message?.guild?.preferredLocale ?? "")
+            return d.deflate(d.message?.guild?.preferredLocale.toTitle() ?? "")
         }
     }
 }

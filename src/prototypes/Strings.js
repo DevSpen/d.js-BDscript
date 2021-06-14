@@ -10,6 +10,10 @@ String.prototype.escape = function() {
     return String(text) 
 }
 
+String.prototype.toTitle = function(sep = "_") {
+    return this.split(sep).map(w => w[0].toUpperCase() + w.slice(1).toLowerCase()).join(" ") 
+}
+
 String.prototype.unescape = function() {
     let text = this 
     

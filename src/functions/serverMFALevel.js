@@ -21,9 +21,9 @@ module.exports = {
             
             if (!guild) return d.sendError("guildID", guildID)
 
-            return d.deflate(guild.mfaLevel)
+            return d.deflate(guild.mfaLevel.toTitle())
         } else {
-            return d.deflate(d.message?.guild?.mfaLevel ?? 0)
+            return d.deflate(d.message?.guild?.mfaLevel.toTitle() ?? 0)
         }
     }
 }

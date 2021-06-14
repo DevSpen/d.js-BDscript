@@ -36,7 +36,7 @@ module.exports = {
         
         if (!guild) return d.sendError("guildID", guildID)
         
-        const bans = await guild.fetchBans().catch(err => null)
+        const bans = await guild.bans.fetch().catch(err => null)
         
         if (!bans) return d.sendError(`:x: Failed to fetch bans`)
             

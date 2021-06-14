@@ -3,6 +3,6 @@ module.exports = {
     description: "return message type",
     returns: "?string",
     execute: async d => {
-        return d.deflate(d.message?.type ?? "")
+        return d.deflate(d.message?.type.toTitle() ?? "")
     }
 }

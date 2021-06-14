@@ -292,6 +292,7 @@ module.exports = class Bot {
             if (!data) throw new Error(`Type '${opts.type}' is not a valid command type.`)
             
             for (const [property, required] of Object.entries(data)) {
+                if (property === "aliases" && opts[property] && !Array.isArray(opts[property])) throw new Error(`command.${property} only accepts an array!`)
                 if (!opts[property] && required) throw new Error(`command.${property} is required for '${opts.type}' command!`)
             }
             
