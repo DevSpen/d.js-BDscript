@@ -1,6 +1,6 @@
 module.exports = {
     name: "$serverNSFWLevel",
-    description: "Returns the NSFW level of a server. Responses are DEFAULT, EXPLICIT, SAFE, AGE_RESTRICTED.",
+    description: "Returns the NSFW level of a server. Responses are Default, Explicit , Safe, Age Restricted.",
     brackets: true,
     optional: true,
     fields: [
@@ -21,9 +21,9 @@ module.exports = {
 
             if (!guild) return d.sendError("guildID", guildID)
 
-            return d.deflate(guild.nsfwLevel)
+            return d.deflate(guild.nsfwLevel.toTitle())
         } else {
-            return d.deflate(d.message?.guild?.nsfwLevel ?? 0)
+            return d.deflate(d.message?.guild?.nsfwLevel.toTitle() ?? "")
         }
     }
 }
