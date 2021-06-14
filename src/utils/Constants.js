@@ -5,7 +5,7 @@ const Bot = require("../structures/Bot")
 
 /**
  * The command type.
- * @typedef {string} CommandType
+ * @typedef {CommandTypes} CommandType
  */
 exports.CommandType = createEnum([
     "command"
@@ -115,34 +115,6 @@ module.exports.CommandTypes = {
  */
 
 /**
- * 
- * @typedef {string} Intent The intents to enable (through array), or one of these strings:
- * * `all` - Enables all intents. 
- * * `non_privileged` - Enables all intents except privileged ones.
- * @example "all"
- * @example ["guilds", "guildintegrations"]
- */
-
-/**
- * @typedef {string} Intents Available intents:
- * * guilds
- * * guildmembers
- * * guildbans
- * * guildemojis
- * * guildintegrations
- * * guildwebhooks
- * * guildinvites
- * * guildvoicestates
- * * guildpresences
- * * guildmessages
- * * guildmessagereactions
- * * guildmessagetyping
- * * directmessages
- * * directmessagereactions
- * * directmessagetyping
- */
-
-/**
  * Returns a message embed object with given index. 
  * @param {number|string} index the index of the embed.
  * @returns {MessageEmbed}
@@ -246,7 +218,7 @@ function execute(DATA = {}) {}
  * @property {string[]} users the users this bot will react to.
  * @property {string|string[]} prefix the prefix or prefixes for this bot.
  * @property {boolean} [experimental=false] whether to enable experimental mode.
- * @property {Intents[]|string} intents the intent or intents to pass to client.
+ * @property {Intents[]|CustomIntentOverload} intents the intent or intents to pass to client.
  */ 
 
 /**

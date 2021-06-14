@@ -45,7 +45,7 @@ module.exports = {
             
             if (!member) return d.sendError(`:x: Invalid userID in \`${d.value.func.name}\``)
             
-            const roles = member.roles.cache.filter(r => r.id !== d.message.guild.id).sort((x, y) => sort === "yes" ? y.position - x.position : true).map(r => option === "mention" ? r.toString() : r[option] || "")
+            const roles = member.roles.cache.filter(r => r.id !== d.message.guild.id).sort((x, y) => sort === "yes" ? y.position - x.position : true).map(r => option === "mention" ? r.toString() : r[option] ?? "")
             
             return d.deflate(d.value.id, option === "count" ? roles.length : roles.join(separator))
         } else {

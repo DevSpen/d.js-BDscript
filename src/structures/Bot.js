@@ -356,7 +356,7 @@ module.exports = class Bot {
     
     /**
      * add multiple events to client.
-     * @param {string[]} events events to add to client.
+     * @param {EventTypes|EventTypes[]} events events to add to client.
      */
     addEvents(events = []) {
         return this.addEvent(events)
@@ -364,7 +364,7 @@ module.exports = class Bot {
 
     /**
      * Add event listeners to the client.
-     * @param {string|string[]} eventOrEvents events to enable on this client. 
+     * @param {EventTypes|EventTypes[]} eventOrEvents events to enable on this client. 
      */
     addEvent(eventOrEvents = []) {
         if (typeof eventOrEvents === "string") {

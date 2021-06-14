@@ -20,13 +20,13 @@ const bot = new bdjs({
 })
 
 bot.command({
-    type: bdjs.Constants.CommandTypes.command, //the command type, CommandTypes.command (behaves same as "command") stands for message event commands
+    type: "command", //the command type, CommandTypes.command (behaves same as "command") stands for message event commands
     name: "say", //command trigger
     code: "$message"
 })
 
 bot.addEvent([
-    bdjs.Constants.EventTypes.onMessage //behaves same as "onMessage"
+    "onMessage" //behaves same as "onMessage"
 ]) //add message callback
 
 bot.login() //logs the bot on discord
