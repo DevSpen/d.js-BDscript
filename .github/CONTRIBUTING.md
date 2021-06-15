@@ -17,7 +17,9 @@ module.exports = {
     name: "$functionName",
     returns: "...",
     description: "...",
- // code here
+    execute: async d => {
+        //code here
+    }
 }
 ```
 
@@ -37,7 +39,10 @@ module.exports = {
         type: "...",
         description: "..."
     }],
-    // code here
+    execute: async d => {
+        //code here
+    }
+}
 ```
 
 ## Contributing Terms
@@ -49,7 +54,7 @@ module.exports = {
 
 ## Tips
 - Use `?` in `returns` property if the function can return an empty string.
-- You can use `string`, `boolean`, `number`, `all`, `?string`, `?boolean`, `?number`, or `?all` for the `returns` property.
+- You can use `string`, `boolean`, `number`, `any`, `?string`, `?boolean`, `?number`, or `?any` for the `returns` property.
 - The `description` should be short, but explain the function well.
 - The `optional` property allows you to make the brackets (aka fields) optional. By inputting `true` all fields will be optional for the function. Default is `false`. 
 - If you are a frequent contrubtor, you may get the Contributor role in our [Discord Server](https://dsc.gg/d.js-bdscript)!
