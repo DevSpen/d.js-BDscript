@@ -1,8 +1,10 @@
 module.exports = {
     name: "$isBotPublic",
     returns: "?boolean",
-    description: "Returns if the bot is public or not. (set in the Developer Portal)",
+    description: "Returns whether or not the bot is public. (set in the Developer Portal)",
     execute: async d =>{
-        return d.deflate(d.client?.application?.botPublic ?? "")
+        const app = await d.client.application.fetch()
+
+        return d.deflate(app.botPublic ?? "")
     }
 }
