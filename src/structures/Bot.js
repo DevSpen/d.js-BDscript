@@ -54,7 +54,7 @@ module.exports = class Bot {
         
         /**
          * Manager of slash commands.
-         * @type {Discord.Collection}
+         * @type {Discord.Collection<string, Discord.ApplicationCommandData>}
          */
         this.slash_commands_data = new Discord.Collection()
 
@@ -202,7 +202,12 @@ module.exports = class Bot {
         return new RegExp(`^<@!?${this.client.user?.id}>`)
     }
     
-    createSlashCommandData(opts = new Discord.ApplicationCommand()) {
+    /**
+     * Creates a slash command.
+     * @param {Discord.ApplicationCommandData} opts the slash command data.
+     * @returns {void}
+     */
+    createSlashCommandData(opts = {}) {
         return this.slash_commands_data.set(opts.name, opts)
     }
 

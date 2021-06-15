@@ -57,5 +57,5 @@ module.exports = {
 - You can use `string`, `boolean`, `number`, `any`, `?string`, `?boolean`, `?number`, or `?any` for the `returns` property.
 - The `description` should be short, but explain the function well.
 - The `optional` property allows you to make the brackets (aka fields) optional. By inputting `true` all fields will be optional for the function. Default is `false`. 
-- If you are a frequent contrubtor, you may get the Contributor role in our [Discord Server](https://dsc.gg/d.js-bdscript)!
+- If you are a frequent contributor, you may get the Contributor role in our [Discord Server](https://dsc.gg/d.js-bdscript)!
 - Use your resources! Look at existing codes, and the [discord.js documentation](https://discord.js.org/#/docs/main/master/general/welcome).

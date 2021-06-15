@@ -17,7 +17,7 @@ module.exports = {
             
             const channel = d.client.channels.cache.find(c => c.name === data)
             
-            if (!channel) return d.sendError("channelID", data)
+            if (!channel) return d.sendError("channel name", data)
             
             return d.deflate(d.value.id, channel.id) 
         } else {
