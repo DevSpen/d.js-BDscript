@@ -1,6 +1,6 @@
 module.exports = {
     name: "$serverVerificationLevel",
-    description: "The verification level of the server. Returns NONE, LOW, MEDIUM, HIGH, VERY_HIGH.",
+    description: "The verification level of the server. Returns None, Low, Medium, High, Very High.",
     brackets: true,
     optional: true,
     fields: [
