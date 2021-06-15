@@ -1,6 +1,6 @@
 module.exports = {
     name: "$serverExplicitContentFilter",
-    description: "The explicit content filter level of the server. Returns DISABLED, MEMBERS_WITHOUT_ROLES, or ALL_MEMBERS.",
+    description: "The explicit content filter level of the server. Returns Disabled, Members Without Roles, or All Members.",
     brackets: true,
     optional: true,
     fields: [
